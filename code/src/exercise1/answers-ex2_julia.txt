@@ -1,0 +1,12 @@
+What is the goal of this paper?
+Their goal is to support efficient evaluation of phrase queries (low disk overheads, half query evaluation time) by evaluating phrase queries through a combination of an inverted index and nextword index.
+
+
+How do the authors reach their goal?
+They use an inverted index on rare words and a form of nextword index on common words, since inverted indexes are not that efficient for commeon words, while nextword indexes are much faster.
+
+
+How do they evaluate their approach?
+They compare the results of previous research with their approach of combined query evaluation, i.e. inverted and nextword index.
+This yeld to the result, that the use of an auxiliary nextword index for common words in addition to the inverted index reduces query time. Further the comparison has shown that stopping is not needed for phrase queries since this leads to significant error rates and does not speed up phrase querying significantly.
+

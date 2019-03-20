@@ -1,0 +1,60 @@
+1) What is the goal of this paper?
+Exploring new techniques for efficient evaluation of phrase queries
+Generally phrase queries are performed by creating an inverted index of the available documents and then query those inverted indexes.
+
+
+2) How do the authors reach their goal?
+The authors have already proposed another solution to this problem by using nextword indices. Using them can speed up queries a lot, but the indexes are twice as large as conventional inverted one and therefore not suitable for all use cases. However making use of a combination of nextword indices and inverted indices phrase querying is twice as fast, but the overhead is only 10%.
+
+
+3) How do they evaluate their approach?
+(I am unsure what this question means. )
+
+According to the authors the cost of evaluating phrase indexes can be cut by a factor of three, with an auxiliary index that is only 3% of the size of the indexed data.
+
+Cite: "For phrase queries, the savings in query evaluation time are dramatic. Average query evaluation time is reduced to 0.06 seconds, faster than inverted files by a factor of 25. For two-word queries, the time falls to 0.01 seconds, which is faster by a factor of 50. The time for 5-word queries is 0.32."
+
+----------------------------------------------------------------------------------
+
+Table 1: Size of inverted index (Mb) after stopping of common words.
+
+Number of words stopped     Index size (Mb)
+0                           2350
+3                           2259
+6                           2195
+10                          2135
+20                          2089
+254                         1708
+
+
+Table 2:  Times for phrase query evaluation (sec-onds) on an inverted index after stopping of com-mon words.  Results are shown for all queries; 2-word queries only; and 5-word queries only.
+
+Number of words stopped     Overall time (sec)  2-word queries  5-word queries
+0                           1.56                0.49            6.41
+3                           0.66                0.30            1.94
+6                           0.45                0.29            1.07
+10                          0.40                0.28            0.81
+20                          0.37                0.28            0.70
+254                         0.18                0.16            0.26
+
+----------------------------------------------------------------------------------
+
+Table 3: Size of nextword index (Mb) containing only common firstwords.
+
+Number of common words      Index size (Mb)
+3                           254
+6                           427
+10                          520
+20                          657
+254                         1366
+
+
+Table 4: Times for phrase query evaluation (seconds) on a combined index, with different numbers of common words used in the nextword index. Results are shown for all queries; 2-word queris only; and 5-word queries only.
+
+Number of common words      Overall time (sec)  2-word queries  5-word queries
+0                           1.56                0.49            6.41
+3                           0.76                0.31            2.99
+6                           0.57                0.31            2.28
+10                          0.53                0.30            2.10
+20                          0.50                0.30            1.98
+254                         0.46                0.27            1.83
