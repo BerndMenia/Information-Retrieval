@@ -1,4 +1,4 @@
-from code.src.exercise1.Index import *
+from code.src.exercise2.Index import *
 
 # TOP10 Dire straits
 index.add('Industrial Disease')
