@@ -41,8 +41,8 @@ class Tokenizer:
 
 
     # Nicely formatted frequency distribution output for the n most common words.
-    def print_frequency(self, text, n=0):
-        frequencies = nltk.FreqDist(text)
+    def print_frequency(self, frequencies, n=0):
+        #frequencies = nltk.FreqDist(text)
 
         if n == 0:
             n = len(frequencies)
@@ -53,7 +53,7 @@ class Tokenizer:
 
     # Check the size of the stopword list imported from NLTK.
     def get_stopwords_list_length(self):
-        len(set(stopwords.words('english')))
+        return len(set(stopwords.words('english')))
 
 
     def count_stopwords(self, text):
