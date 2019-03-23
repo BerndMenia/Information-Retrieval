@@ -33,24 +33,36 @@ class InvertedIndex:
     # document_count should maybe be a parameter, not sure
     def add_document(self, document, count):
         l = []
+
+        # Get all words that are in the index (at the start this should be empty)
         words = [word for word,list_tuple in self.index]
 
+        # Iterate over the document and insert each word into the Inverted Index
         for i in range(len(document)):
             s = self.porter_stemmer.stem(document[i])
+
+            # Just for testing, can ignore.
             l.append((i, s))
 
+            # If the current word of the document is not in the Inverted Index append it to the end (Not yet sorted!)
             if not (s in words):
                 #self.index.append((s, [(self.document_count, i)]))
                 self.index.append((s, [(count, i)]))
                 words.append(s) # Update the words list so that a just appended word can be found
+
+            # If it is already in the Inverted Index find the index of the word and add another tuple to the word
+            # with (document_count, position)
             else:
                 j = search_string(words, s)
                 _,list = self.index[j]
                 #bisect.insort(list, (self.document_count, i))
+
+                # This should insert the tuples of a word in order.
                 bisect.insort(list, (count, i))
                 # list.append((self.document_count, i))
                 self.index[j] = (s, list)
 
+        # Just for testing, can ignore.
         print("l size:", len(l))
         print(l, "\n")
 
