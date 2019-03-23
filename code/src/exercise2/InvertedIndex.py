@@ -2,7 +2,7 @@ from code.src.utils.Utils import binary_search
 from code.src.utils.Utils import search_string
 
 import nltk
-
+import bisect
 
 
 class InvertedIndex:
@@ -31,30 +31,25 @@ class InvertedIndex:
 
     # document = list(string)
     # document_count should maybe be a parameter, not sure
-    def add_document(self, document):
+    def add_document(self, document, count):
         l = []
         words = [word for word,list_tuple in self.index]
 
         for i in range(len(document)):
-        #for i in range(20):
             s = self.porter_stemmer.stem(document[i])
             l.append((i, s))
 
-            # found_i = binary_search(words, s)
-
-            # Word not yet in index
-            # if found_i == -1:
             if not (s in words):
-                self.index.append((s, [(self.document_count, i)]))
+                #self.index.append((s, [(self.document_count, i)]))
+                self.index.append((s, [(count, i)]))
                 words.append(s) # Update the words list so that a just appended word can be found
-                #print(words)
             else:
                 j = search_string(words, s)
                 _,list = self.index[j]
-                list.append((self.document_count, i))
+                #bisect.insort(list, (self.document_count, i))
+                bisect.insort(list, (count, i))
+                # list.append((self.document_count, i))
                 self.index[j] = (s, list)
-
-
 
         print("l size:", len(l))
         print(l, "\n")
@@ -62,10 +57,8 @@ class InvertedIndex:
         print("Index size:", len(self.index))
         print(self.index)
 
-        for index, word in l:
-            self.index
-
         # Sort index!
+        # Even better: Insert indices sorted.
         # self.index.sort()
 
 
