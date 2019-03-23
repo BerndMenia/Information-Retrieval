@@ -25,3 +25,6 @@ for file_path in list_file_paths:
     print(stemmed_text)
 
     inverted_index.add_document(stemmed_text)
+    print(inverted_index.query("the"))
+    print(inverted_index.query("raven"))
+    print(inverted_index.query("hello"))

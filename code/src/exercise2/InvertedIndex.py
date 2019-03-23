@@ -35,8 +35,8 @@ class InvertedIndex:
         l = []
         words = [word for word,list_tuple in self.index]
 
-        #for i in range(len(document)):
-        for i in range(20):
+        for i in range(len(document)):
+        #for i in range(20):
             s = self.porter_stemmer.stem(document[i])
             l.append((i, s))
 
@@ -47,7 +47,7 @@ class InvertedIndex:
             if not (s in words):
                 self.index.append((s, [(self.document_count, i)]))
                 words.append(s) # Update the words list so that a just appended word can be found
-                print(words)
+                #print(words)
             else:
                 j = search_string(words, s)
                 _,list = self.index[j]
@@ -71,6 +71,11 @@ class InvertedIndex:
 
     def query(self, to_search):
         to_search = self.porter_stemmer.stem(to_search)
-        x = 1 # Placeholder
+
+        for word,list_tuple in self.index:
+            if word == to_search:
+                return word, list_tuple
+
+        return ()
 
     # [("b", [(1,3), (1,2), (1,7)]),("a", [(1,9),(2,7)]),("c", [(3,3)])]
