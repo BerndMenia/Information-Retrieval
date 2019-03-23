@@ -18,8 +18,10 @@ for file_path in list_file_paths:
     print("Number of unique terms:", len(set(text)))
     print("NLTK stopwords:", tokenizer.get_stopwords_list_length())
     print("Number of stopwords in text:", tokenizer.count_stopwords(text))
-    tokenizer.print_frequency(frequencies, 50)
+    #tokenizer.print_frequency(frequencies, 50)
 
     inverted_index = InvertedIndex(text)
     stemmed_text = inverted_index.stem_string_list(text)
     print(stemmed_text)
+
+    inverted_index.add_document(stemmed_text)
