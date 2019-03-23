@@ -1,4 +1,5 @@
 from code.src.utils.Utils import binary_search
+from code.src.utils.Utils import search_string
 
 import nltk
 
@@ -35,7 +36,7 @@ class InvertedIndex:
         words = [word for word,list_tuple in self.index]
 
         #for i in range(len(document)):
-        for i in range(6):
+        for i in range(20):
             s = self.porter_stemmer.stem(document[i])
             l.append((i, s))
 
@@ -44,11 +45,14 @@ class InvertedIndex:
             # Word not yet in index
             # if found_i == -1:
             if not (s in words):
-                #print("hi")
                 self.index.append((s, [(self.document_count, i)]))
                 words.append(s) # Update the words list so that a just appended word can be found
                 print(words)
-            #self.index[i] = self.index[i]
+            else:
+                j = search_string(words, s)
+                _,list = self.index[j]
+                list.append((self.document_count, i))
+                self.index[j] = (s, list)
 
 
 
