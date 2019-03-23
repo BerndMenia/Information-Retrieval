@@ -7,8 +7,8 @@ from code.src.exercise2.InvertedIndex import InvertedIndex
 
 list_file_paths = ["books/the_raven.txt", "books/test.txt"]
 inverted_index = InvertedIndex()
+count = 1 # The document counter
 
-count = 1
 for file_path in list_file_paths:
     tokenizer = Tokenizer()
     string = tokenizer.read_in(file_path)
@@ -23,7 +23,7 @@ for file_path in list_file_paths:
     #tokenizer.print_frequency(frequencies, 50)
 
     #inverted_index = InvertedIndex(text)
-    inverted_index.text_list = text
+    inverted_index.text_list = text     # As of now this statement is actually useless because we don't utilized classes as they should be, but /we : P.
 
     stemmed_text = inverted_index.stem_string_list(text)
     print(stemmed_text)
