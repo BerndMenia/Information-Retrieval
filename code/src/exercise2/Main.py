@@ -14,22 +14,28 @@ for file_path in list_file_paths:
     tokenizer = Tokenizer()
     string = tokenizer.read_in(file_path)
     tokens = tokenizer.tokenize_text(string)
-    text = tokenizer.remove_punctuation(tokens)
-    frequencies = tokenizer.get_frequency(text)
+    # remove punctuation and stopwords
+    text_prep_punct = tokenizer.remove_punctuation(tokens)
+    text_prep_stop = tokenizer.remove_stopwords(text_prep_punct)
+    # stem tokens
+    text_prep_stem = tokenizer.stem_words(text_prep_stop)
 
-    print("Number of terms:", len(text))
-    print("Number of unique terms:", len(set(text)))
+    # get text statistics
+    frequencies = tokenizer.get_frequency(text_prep_punct)
+
+    print("Number of terms:", len(text_prep_punct))
+    print("Number of unique terms:", len(set(text_prep_punct)))
     print("NLTK stopwords:", tokenizer.get_stopwords_list_length())
-    print("Number of stopwords in text:", tokenizer.count_stopwords(text))
+    print("Number of stopwords in text:", tokenizer.count_stopwords(text_prep_punct))
     #tokenizer.print_frequency(frequencies, 50)
 
     #inverted_index = InvertedIndex(text)
-    inverted_index.text_list = text     # As of now this statement is actually useless because we don't utilized classes as they should be, but /we : P.
+    inverted_index.text_list = text_prep_punct     # As of now this statement is actually useless because we don't utilized classes as they should be, but /we : P.
 
-    stemmed_text = inverted_index.stem_string_list(text)
-    print(stemmed_text)
+    #stemmed_text = inverted_index.stem_string_list(text)
+    #print(stemmed_text)
 
-    inverted_index.add_document(stemmed_text, count)
+    inverted_index.add_document(text_prep_stem, count)
     count += 1
     print(inverted_index.query("the"))
     print(inverted_index.query("raven"))
@@ -37,4 +43,4 @@ for file_path in list_file_paths:
 
 # testing query parser
 query_parser = QueryParser()
-query_parser.parse_query("this is a test for testing query parsing")
+print(query_parser.parse_query("this is a test for testing query parsing"))

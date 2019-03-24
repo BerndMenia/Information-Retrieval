@@ -73,5 +73,8 @@ class Tokenizer:
         return filtered_sentence
 
     def stem_words(self, tokens):
-        for t in tokens:
-            print(self.stemmer.stem(t))
+        stemmed_sentence = [self.stemmer.stem(t) for t in tokens]
+
+        return stemmed_sentence
+
+
