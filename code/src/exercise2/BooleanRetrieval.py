@@ -112,15 +112,3 @@ class BooleanRetrieval:
                 result.append(i)
 
         return result
-
-    def sim(self, query, document):
-        query_tokens = self.query_parser.parse_query(query)
-        document_tokens = self.query_parser.parse_query(document)
-
-        similarities = []
-        for doc_tok in document_tokens:
-            for q_tok in query_tokens:
-                if doc_tok == q_tok:
-                    similarities.append(doc_tok)
-
-        return len(similarities)/len(query_tokens)
