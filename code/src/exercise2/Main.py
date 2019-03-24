@@ -1,5 +1,6 @@
 from code.src.exercise1.Tokenizer import Tokenizer
 from code.src.exercise2.InvertedIndex import InvertedIndex
+from code.src.exercise2.QueryParser import QueryParser
 
 
 # text = "Such an analysis can reveal features that are not easily visible from the variations in the individual genes and can lead to a picture of expression that is more biologically transparent and accessible to interpretation"
@@ -33,3 +34,7 @@ for file_path in list_file_paths:
     print(inverted_index.query("the"))
     print(inverted_index.query("raven"))
     print(inverted_index.query("hello"))
+
+# testing query parser
+query_parser = QueryParser()
+query_parser.parse_query("this is a test for testing query parsing")

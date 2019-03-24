@@ -2,11 +2,13 @@ import nltk
 from nltk.corpus import stopwords
 from urllib.request import urlopen
 from os.path import abspath
+from nltk.stem import PorterStemmer
 
 
 class Tokenizer:
 
     def __init__(self):
+        self.stemmer = PorterStemmer()
         print("Hello!")
 
 
@@ -62,3 +64,14 @@ class Tokenizer:
             if s in stopwords.words('english'):
                 count += 1
         return count
+
+    def remove_stopwords(self, tokens):
+        stopword_list = set(stopwords.words('english'))
+
+        filtered_sentence = [w for w in tokens if not w in stopword_list]
+
+        return filtered_sentence
+
+    def stem_words(self, tokens):
+        for t in tokens:
+            print(self.stemmer.stem(t))
