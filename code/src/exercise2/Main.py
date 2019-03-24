@@ -38,15 +38,10 @@ for file_path in list_file_paths:
     inverted_index.text_list = text_prep_punct     # As of now this statement is actually useless because we don't utilized classes as they should be, but /we : P.
     inverted_index.add_document(text_prep_stem, count)
     count += 1
-    #print(inverted_index.query("the"))
-    print(inverted_index.query("raven"))
-    #print(inverted_index.query("hello"))
 
+    bool_retrieval = BooleanRetrieval()
+    bool_retrieval.bool_search("raven NOT funny", inverted_index)
+    sim_result = bool_retrieval.sim("A raven sitting on a line, funny to watch, nonsense - it's just a test", tokenizer.read_in(file_path))
+    print("test sim measure:")
+    print(sim_result)
 
-# JUST FOR TESTING
-# testing query parser
-query_parser = QueryParser()
-print(query_parser.parse_query("this is a test for testing query parsing"))
-
-bool_retrieval = BooleanRetrieval()
-bool_retrieval.bool_search("raven NOT funny", inverted_index)
