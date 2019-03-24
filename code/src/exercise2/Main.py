@@ -49,4 +49,4 @@ query_parser = QueryParser()
 print(query_parser.parse_query("this is a test for testing query parsing"))
 
 bool_retrieval = BooleanRetrieval()
-bool_retrieval.bool_search("work OR funny", inverted_index)
+bool_retrieval.bool_search("raven NOT funny", inverted_index)
