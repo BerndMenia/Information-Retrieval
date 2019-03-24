@@ -60,8 +60,8 @@ class InvertedIndex:
                 self.index[j] = (s, list)
 
         # Just for testing, can ignore.
-        print("l size:", len(l))
-        print(l, "\n")
+        #print("l size:", len(l))
+        #print(l, "\n")
 
         print("Index size:", len(self.index))
         print(self.index)

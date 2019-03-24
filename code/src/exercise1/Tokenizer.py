@@ -9,7 +9,6 @@ class Tokenizer:
 
     def __init__(self):
         self.stemmer = PorterStemmer()
-        print("Hello!")
 
 
     # Read in a text file from a local directory. Right now the books-directory  is placed in root.
@@ -43,7 +42,7 @@ class Tokenizer:
 
 
     # Nicely formatted frequency distribution output for the n most common words.
-    def print_frequency(self, frequencies, n=0):
+    def print_frequency(self, frequencies, n):
         #frequencies = nltk.FreqDist(text)
 
         if n == 0:
