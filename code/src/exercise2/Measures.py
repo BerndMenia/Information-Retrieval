@@ -8,6 +8,7 @@ class Measures:
         query_tokens = self.query_parser.parse_query(query)
         document_tokens = self.query_parser.parse_query(document)
 
+        # Can be a simple counter instead of a list. 
         similarities = []
         for query_token in query_tokens:
             if query_token in document_tokens:
