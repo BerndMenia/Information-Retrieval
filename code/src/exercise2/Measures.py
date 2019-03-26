@@ -9,18 +9,6 @@ class Measures:
         document_tokens = self.query_parser.parse_query(document)
 
         similarities = []
-        for doc_tok in document_tokens:
-            for q_tok in query_tokens:
-                if doc_tok == q_tok:
-                    similarities.append(doc_tok)
-
-        return len(similarities) / len(query_tokens)
-
-    def sim2(self, query, document):
-        query_tokens = self.query_parser.parse_query(query)
-        document_tokens = self.query_parser.parse_query(document)
-
-        similarities = []
         for query_token in query_tokens:
             if query_token in document_tokens:
                 similarities.append(query_token)

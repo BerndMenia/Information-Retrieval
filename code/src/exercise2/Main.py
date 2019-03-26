@@ -53,10 +53,8 @@ bool_retrieval.bool_search(test_query, inverted_index)
 measures = Measures()
 # sim_result = measures.sim("We have some problem, a problem of theoretical nature, nonsense - it's just a test", tokenizer.read_in(file_path)) #TODO: NOTE: the first parameter of sim() should be a query out of queries.csv. For testing purposes I just wrote down that meaningless string
 
-sim_result1 = measures.sim(test_query, tokenizer.read_in(list_file_paths[1]))
-sim_result2 = measures.sim2(test_query, tokenizer.read_in(list_file_paths[1]))
-print("Similarity1: ", sim_result1)
-print("Similarity2: ", sim_result2)
+sim_result = measures.sim(test_query, tokenizer.read_in(list_file_paths[1]))
+print("Similarity1: ", sim_result)
 # TODO: unsure about the parameters for precision and recall - i think we need the overall set of postings for the corresponding document together with the set of postings specific for our query
 recall_measure = measures.recall([], [])
 print("Recall: ", recall_measure)
