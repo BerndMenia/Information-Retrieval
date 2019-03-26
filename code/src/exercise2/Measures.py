@@ -16,6 +16,17 @@ class Measures:
 
         return len(similarities) / len(query_tokens)
 
+    def sim2(self, query, document):
+        query_tokens = self.query_parser.parse_query(query)
+        document_tokens = self.query_parser.parse_query(document)
+
+        similarities = []
+        for query_token in query_tokens:
+            if query_token in document_tokens:
+                similarities.append(query_token)
+
+        return len(similarities) / len(query_tokens)
+
     # Recall = No. of relevant documents retrieved / No. of total relevant documents
     def recall(self, total_relevant_documents, relevant_documents):
         if len(total_relevant_documents) > 0:

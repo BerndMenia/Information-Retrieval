@@ -32,29 +32,35 @@ for file_path in list_file_paths:
     print("NLTK stopwords:", tokenizer.get_stopwords_list_length())
     print("Number of stopwords in text:", tokenizer.count_stopwords(text_prep_punct))
     print("Overall frequencies: ", tokenizer.print_frequency(frequencies, 0))
-    print("Top 50 frequencies: ", tokenizer.print_frequency(frequencies, 50))
+    print("Top 50 frequencies: ", tokenizer.print_frequency(frequencies, 10))
 
     # create inverted index
     inverted_index.text_list = text_prep_punct     # As of now this statement is actually useless because we don't utilized classes as they should be, but /we : P.
     inverted_index.add_document(text_prep_stem, count)
     count += 1
 
-    # here we get the first query out of queries.csv
-    query_list = helper.get_sample_queries()
-    sample_query = query_list[1]
 
-    # TODO: NOTE: this was just for testing the boolean retrieval since such queries are not given in queries.csv ?
-    bool_retrieval = BooleanRetrieval()
-    bool_retrieval.bool_search("theoretical OR problem", inverted_index)
+# here we get the first query out of queries.csv
+query_list = helper.get_sample_queries()
+sample_query = query_list[1]
 
-    # calculate similarity measure (ex 2.d) and evaluation measures (ex 2.3)
-    measures = Measures()
-    sim_result = measures.sim("We have some problem, a problem of theoretical nature, nonsense - it's just a test", tokenizer.read_in(file_path)) #TODO: NOTE: the first parameter of sim() should be a query out of queries.csv. For testing purposes I just wrote down that meaningless string
-    print("Similarity: ", print(sim_result))
-    # TODO: unsure about the parameters for precision and recall - i think we need the overall set of postings for the corresponding document together with the set of postings specific for our query
-    recall_measure = measures.recall([], [])
-    print("Recall: ", recall_measure)
-    precision_measure = measures.precision([], [])
-    print("Precision:", precision_measure)
-    f1_score = measures.f1score(recall_measure, precision_measure)
-    print("F1-score: ", f1_score)
+test_query = "theoretical OR problem"
+# TODO: NOTE: this was just for testing the boolean retrieval since such queries are not given in queries.csv ?
+bool_retrieval = BooleanRetrieval()
+bool_retrieval.bool_search(test_query, inverted_index)
+
+# calculate similarity measure (ex 2.d) and evaluation measures (ex 2.3)
+measures = Measures()
+# sim_result = measures.sim("We have some problem, a problem of theoretical nature, nonsense - it's just a test", tokenizer.read_in(file_path)) #TODO: NOTE: the first parameter of sim() should be a query out of queries.csv. For testing purposes I just wrote down that meaningless string
+
+sim_result1 = measures.sim(test_query, tokenizer.read_in(list_file_paths[1]))
+sim_result2 = measures.sim2(test_query, tokenizer.read_in(list_file_paths[1]))
+print("Similarity1: ", sim_result1)
+print("Similarity2: ", sim_result2)
+# TODO: unsure about the parameters for precision and recall - i think we need the overall set of postings for the corresponding document together with the set of postings specific for our query
+recall_measure = measures.recall([], [])
+print("Recall: ", recall_measure)
+precision_measure = measures.precision([], [])
+print("Precision:", precision_measure)
+f1_score = measures.f1score(recall_measure, precision_measure)
+print("F1-score: ", f1_score)
