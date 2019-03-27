@@ -2,12 +2,14 @@ import nltk
 from nltk.corpus import stopwords
 from urllib.request import urlopen
 from os.path import abspath
+from nltk.stem import WordNetLemmatizer
 from nltk.stem import PorterStemmer
 
 
 class Tokenizer:
 
     def __init__(self):
+        self.lemmatizer = WordNetLemmatizer()
         self.stemmer = PorterStemmer()
 
 
@@ -70,6 +72,9 @@ class Tokenizer:
         filtered_sentence = [w for w in tokens if not w in stopword_list]
 
         return filtered_sentence
+
+    def lem_words(self, tokens):
+        return [{self.lemmatizer.lemmatize(word) for word in tokens}]
 
     def stem_words(self, tokens):
         stemmed_sentence = [self.stemmer.stem(t) for t in tokens]
