@@ -17,6 +17,7 @@ class InvertedIndex:
         # index --> list[("string", list[(doc, position))]
         # self.index = {}
         self.index = []
+        self.index2 = {}
         self.document_count = 1
 
 
@@ -69,6 +70,23 @@ class InvertedIndex:
         # Sort index!
         # Even better: Insert indices sorted.
         # self.index.sort()
+
+
+    def add_document2(self, document, count):
+        keys = {key for key in self.index2.keys()}
+
+        for i in range(len(document)):
+            s = document[i]
+
+            if not (s in keys):
+                self.index2[s] = [(count, i)]
+                keys.add(s)
+            else:
+                #self.index2[s].append((count, i))
+                bisect.insort(self.index2[s], (count, i))
+
+        print(self.index2)
+
 
 
     def query(self, to_search):

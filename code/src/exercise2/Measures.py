@@ -8,7 +8,7 @@ class Measures:
         query_tokens = self.query_parser.parse_query(query)
         document_tokens = self.query_parser.parse_query(document)
 
-        # Can be a simple counter instead of a list. 
+        # Can be a simple counter instead of a list.
         similarities = []
         for query_token in query_tokens:
             if query_token in document_tokens:
@@ -30,7 +30,7 @@ class Measures:
         else:
             return 0
 
-    # F - Score = 2 * Precision * Recall / Precision + Recall
+    # F - Score = 2 * Precision * Recall / (Precision + Recall)
     def f1score(self, recall_score, precision_score):
         if(precision_score+recall_score)>0:
             return 2*precision_score*recall_score / (precision_score+recall_score)

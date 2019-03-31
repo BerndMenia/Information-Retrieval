@@ -36,7 +36,7 @@ for file_path in list_file_paths:
 
     # create inverted index
     inverted_index.text_list = text_prep_punct     # As of now this statement is actually useless because we don't utilized classes as they should be, but /we : P.
-    inverted_index.add_document(text_prep_stem, count)
+    inverted_index.add_document2(text_prep_stem, count)
     count += 1
 
 
