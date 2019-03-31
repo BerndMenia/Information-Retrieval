@@ -47,11 +47,19 @@ for i in range(1, 11):
 
 print(inverted_index.index2)
 
+
+'''Monogram'''
 mono_words = inverted_index.get_mono_words()
 print(len(mono_words), mono_words)
 
 inverted_index.construct_monogram()
 print(inverted_index.monogram)
+
+
+'''Bigram'''
+bi_words = inverted_index.get_bi_words()
+print(len(bi_words), bi_words)
+
 
 # here we get the first query out of queries.csv
 query_list = helper.get_sample_queries()

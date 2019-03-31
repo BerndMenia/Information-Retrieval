@@ -101,6 +101,23 @@ class InvertedIndex:
         return set(full_string)
 
 
+    def get_bi_words(self):
+        if not len(self.index2) > 0:
+            return
+
+        full_string = ""
+
+        for s in self.index2.keys():
+            full_string += "$" + s
+        full_string += "$"
+
+        bi_words = set()
+        for i in range(len(full_string)-1):
+            bi_words.add(full_string[i] + full_string[i+1])
+
+        return bi_words
+
+
 
     def construct_monogram(self):
         mono_words = self.get_mono_words()
@@ -113,11 +130,9 @@ class InvertedIndex:
                     elif not key in self.monogram[mono]:
                         self.monogram[mono][key] = self.index2[key]
 
-                    #if not mono in self.monogram:
-                    #    self.monogram[mono] = {key : self.index2[key]}
-                    #else:
-                    #    inner_dict = self.monogram[mono]
 
+    def construct_bigram(self):
+        bi_words = self.get_bi_words()
 
 
 
