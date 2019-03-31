@@ -103,7 +103,7 @@ class InvertedIndex:
 
     def get_bi_words(self):
         if not len(self.index2) > 0:
-            return
+            return set()
 
         full_string = ""
 
@@ -116,6 +116,28 @@ class InvertedIndex:
             bi_words.add(full_string[i] + full_string[i+1])
 
         return bi_words
+
+
+    def get_nwords(self, n):
+        if not len(self.index2) > 0:
+            return set()
+
+        full_string = ""
+
+        if n == 1:
+            return set(''.join( [full_string + s for s in self.index2.keys()] ) )
+            #return set(''.join(self.index2.keys()))
+            #return set( [full_string + s for s in self.index2.keys()] )
+
+        for s in self.index2.keys():
+            full_string += "$" + s
+        full_string += "$"
+
+        nwords = set()
+        for i in range(len(full_string) - (n-1)):
+            nwords.add(full_string[i:i+n])
+
+        return nwords
 
 
     def construct_monogram(self):
@@ -145,13 +167,14 @@ class InvertedIndex:
     def construct_ngram(self, n):
         nwords = set()
         ngram = {}
+        nwords = self.get_nwords(n)
 
         # Maybe replace with a switch()
         if n == 1:
-            nwords = self.get_mono_words()
+            #nwords = self.get_mono_words()
             ngram = self.monogram
         elif n == 2:
-            nwords = self.get_bi_words()
+            #nwords = self.get_bi_words()
             ngram = self.bigram
 
         for word in nwords:
