@@ -27,10 +27,10 @@ class BooleanRetrieval:
                 token2 = self.query_parser.parse_query(token2)
 
                 # get index entry for word1 and word2
-                index_token1 = inverted_index.query(token1[0])
+                index_token1 = inverted_index.query3(token1[0])
                 if not index_token1:
                     index_token1 = []
-                index_token2 = inverted_index.query(token2[0])
+                index_token2 = inverted_index.query3(token2[0])
                 if not index_token2:
                     index_token2 = []
 
