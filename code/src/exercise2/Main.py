@@ -50,15 +50,18 @@ print(inverted_index.index2)
 
 '''Monogram'''
 mono_words = inverted_index.get_mono_words()
-print(len(mono_words), mono_words)
-
 inverted_index.construct_monogram()
-print(inverted_index.monogram)
+
+print(len(mono_words), mono_words)
+print(inverted_index.monogram, "\n")
 
 
 '''Bigram'''
 bi_words = inverted_index.get_bi_words()
+inverted_index.construct_bigram()
+
 print(len(bi_words), bi_words)
+print(inverted_index.bigram, "\n")
 
 
 # here we get the first query out of queries.csv

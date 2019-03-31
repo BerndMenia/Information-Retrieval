@@ -118,7 +118,6 @@ class InvertedIndex:
         return bi_words
 
 
-
     def construct_monogram(self):
         mono_words = self.get_mono_words()
 
@@ -134,6 +133,13 @@ class InvertedIndex:
     def construct_bigram(self):
         bi_words = self.get_bi_words()
 
+        for bi in bi_words:
+            for key in self.index2.keys():
+                if bi in key:
+                    if not bi in self.bigram:
+                        self.bigram[bi] = {key: self.index2[key]}
+                    elif not key in self.bigram[bi]:
+                        self.bigram[bi][key] = self.index2[key]
 
 
     def query(self, to_search):
