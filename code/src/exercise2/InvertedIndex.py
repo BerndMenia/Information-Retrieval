@@ -125,8 +125,8 @@ class InvertedIndex:
         full_string = ""
 
         if n == 1:
-            return set(''.join( [full_string + s for s in self.index2.keys()] ) )
-            #return set(''.join(self.index2.keys()))
+            #return set(''.join( [full_string + s for s in self.index2.keys()] ) )
+            return set(''.join(self.index2.keys()))
             #return set( [full_string + s for s in self.index2.keys()] )
 
         for s in self.index2.keys():
@@ -169,17 +169,7 @@ class InvertedIndex:
             return
 
         n_words = self.get_nwords(n)
-        n_gram = self.ngrams[n-1]
-
-        # Maybe replace with a switch()
-        #if n == 1:
-        #nwords = self.get_mono_words()
-        #    ngram = self.monogram
-        #elif n == 2:
-        #nwords = self.get_bi_words()
-        #    ngram = self.bigram
-        #elif n == 3:
-        #    ngram = self.trigram
+        n_gram  = self.ngrams[n-1]
 
         for word in n_words:
             for key in self.index2.keys():
@@ -188,6 +178,7 @@ class InvertedIndex:
                         n_gram[word] = {key: self.index2[key]}
                     elif not key in n_gram[word]:
                         n_gram[word][key] = self.index2[key]
+                    # TODO else: is not necessary, but could be useful to update the ngram later on.
 
 
 
