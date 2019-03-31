@@ -49,9 +49,10 @@ print(inverted_index.index2)
 
 inverted_index.construct_ngram(1)
 inverted_index.construct_ngram(2)
+inverted_index.construct_ngram(3)
 
 '''Monogram'''
-mono_words = inverted_index.get_mono_words()
+mono_words = inverted_index.get_nwords(1)
 #inverted_index.construct_monogram()
 
 print(len(mono_words), mono_words)
@@ -59,12 +60,31 @@ print(inverted_index.monogram, "\n")
 
 
 '''Bigram'''
-bi_words = inverted_index.get_bi_words()
+bi_words = inverted_index.get_nwords(2)
 #inverted_index.construct_bigram()
 
 print(len(bi_words), bi_words)
 print(inverted_index.bigram, "\n")
 
+
+'''Trigram'''
+tri_words = inverted_index.get_nwords(3)
+print(len(tri_words), tri_words)
+print(inverted_index.trigram, "\n")
+
+
+'''Query ngrams'''
+print("Searching for e:")
+print(inverted_index.query_ngram("e"), "\n")
+
+print("Searching for xp:")
+print(inverted_index.query_ngram("xp"), "\n")
+
+print("Searching for agr:")
+print(inverted_index.query_ngram("agr"), "\n")
+
+print("Searching for my:")
+print(inverted_index.query_ngram("my"), "\n")
 
 # here we get the first query out of queries.csv
 query_list = helper.get_sample_queries()

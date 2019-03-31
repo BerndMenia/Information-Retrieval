@@ -20,7 +20,7 @@ class InvertedIndex:
         self.monogram = {}
         self.bigram   = {}
         self.trigram  = {}
-
+        self.ngrams   = [self.monogram, self.bigram, self.trigram]
         self.document_count = 1
 
 
@@ -165,25 +165,29 @@ class InvertedIndex:
 
 
     def construct_ngram(self, n):
-        nwords = set()
-        ngram = {}
-        nwords = self.get_nwords(n)
+        if not 0 < n <= len(self.ngrams):
+            return
+
+        n_words = self.get_nwords(n)
+        n_gram = self.ngrams[n-1]
 
         # Maybe replace with a switch()
-        if n == 1:
-            #nwords = self.get_mono_words()
-            ngram = self.monogram
-        elif n == 2:
-            #nwords = self.get_bi_words()
-            ngram = self.bigram
+        #if n == 1:
+        #nwords = self.get_mono_words()
+        #    ngram = self.monogram
+        #elif n == 2:
+        #nwords = self.get_bi_words()
+        #    ngram = self.bigram
+        #elif n == 3:
+        #    ngram = self.trigram
 
-        for word in nwords:
+        for word in n_words:
             for key in self.index2.keys():
                 if word in key:
-                    if not word in ngram:
-                        ngram[word] = {key: self.index2[key]}
-                    elif not key in ngram[word]:
-                        ngram[word][key] = self.index2[key]
+                    if not word in n_gram:
+                        n_gram[word] = {key: self.index2[key]}
+                    elif not key in n_gram[word]:
+                        n_gram[word][key] = self.index2[key]
 
 
 
@@ -210,5 +214,18 @@ class InvertedIndex:
             return to_search, list_tuple
         else:
             return ()
+
+
+    def query_ngram(self, to_search):
+        result = {}
+        n = len(to_search)
+
+        if 0 < n <= len(self.ngrams):
+            n_gram  = self.ngrams[n-1]
+
+            if to_search in n_gram:
+                result = n_gram[to_search]
+
+        return result
 
     # [("b", [(1,3), (1,2), (1,7)]),("a", [(1,9),(2,7)]),("c", [(3,3)])]
