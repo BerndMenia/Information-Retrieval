@@ -15,9 +15,12 @@ class InvertedIndex:
             self.text_list = text
 
         # index --> list[("string", list[(doc, position))]
-        # self.index = {}
-        self.index = []
-        self.index2 = {}
+        self.index    = []
+        self.index2   = {}
+        self.monogram = {}
+        self.bigram   = {}
+        self.trigram  = {}
+
         self.document_count = 1
 
 
@@ -85,7 +88,36 @@ class InvertedIndex:
                 #self.index2[s].append((count, i))
                 bisect.insort(self.index2[s], (count, i))
 
-        print(self.index2)
+        #print(self.index2)
+
+
+    # https://stackoverflow.com/questions/13902805/list-of-all-unique-characters-in-a-string
+    def get_mono_words(self):
+        full_string = ""
+
+        for s in self.index2.keys():
+            full_string += s
+
+        return set(full_string)
+
+
+
+    def construct_monogram(self):
+        mono_words = self.get_mono_words()
+
+        for mono in mono_words:
+            for key in self.index2.keys():
+                if mono in key:
+                    if not mono in self.monogram:
+                        self.monogram[mono] = {key: self.index2[key]}
+                    elif not key in self.monogram[mono]:
+                        self.monogram[mono][key] = self.index2[key]
+
+                    #if not mono in self.monogram:
+                    #    self.monogram[mono] = {key : self.index2[key]}
+                    #else:
+                    #    inner_dict = self.monogram[mono]
+
 
 
 

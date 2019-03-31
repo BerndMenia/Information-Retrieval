@@ -13,10 +13,15 @@ list_file_paths = ["files/1.txt", "files/2.txt"]
 inverted_index = InvertedIndex()
 count = 1 # The document counter
 
-for file_path in list_file_paths:
+#for file_path in list_file_paths:
+for i in range(1, 11):
+    file_path = "files/" + str(i) + ".txt"
+
     # preprocess input text
     tokenizer = Tokenizer()
+
     string = tokenizer.read_in(file_path)
+
     tokens = tokenizer.tokenize_text(string)
     # remove punctuation and stopwords
     text_prep_punct = tokenizer.remove_punctuation(tokens)
@@ -31,14 +36,22 @@ for file_path in list_file_paths:
     print("Number of unique terms:", len(set(text_prep_punct)))
     print("NLTK stopwords:", tokenizer.get_stopwords_list_length())
     print("Number of stopwords in text:", tokenizer.count_stopwords(text_prep_punct))
-    print("Overall frequencies: ", tokenizer.print_frequency(frequencies, 0))
+    #print("Overall frequencies: ", tokenizer.print_frequency(frequencies, 0))
     print("Top 50 frequencies: ", tokenizer.print_frequency(frequencies, 10))
+    print()
 
     # create inverted index
     inverted_index.text_list = text_prep_punct     # As of now this statement is actually useless because we don't utilized classes as they should be, but /we : P.
     inverted_index.add_document2(text_prep_stem, count)
     count += 1
 
+print(inverted_index.index2)
+
+mono_words = inverted_index.get_mono_words()
+print(len(mono_words), mono_words)
+
+inverted_index.construct_monogram()
+print(inverted_index.monogram)
 
 # here we get the first query out of queries.csv
 query_list = helper.get_sample_queries()
