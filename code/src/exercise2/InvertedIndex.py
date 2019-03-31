@@ -142,6 +142,28 @@ class InvertedIndex:
                         self.bigram[bi][key] = self.index2[key]
 
 
+    def construct_ngram(self, n):
+        nwords = set()
+        ngram = {}
+
+        # Maybe replace with a switch()
+        if n == 1:
+            nwords = self.get_mono_words()
+            ngram = self.monogram
+        elif n == 2:
+            nwords = self.get_bi_words()
+            ngram = self.bigram
+
+        for word in nwords:
+            for key in self.index2.keys():
+                if word in key:
+                    if not word in ngram:
+                        ngram[word] = {key: self.index2[key]}
+                    elif not key in ngram[word]:
+                        ngram[word][key] = self.index2[key]
+
+
+
     def query(self, to_search):
         to_search = self.porter_stemmer.stem(to_search)
 

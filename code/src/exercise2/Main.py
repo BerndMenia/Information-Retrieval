@@ -47,10 +47,12 @@ for i in range(1, 11):
 
 print(inverted_index.index2)
 
+inverted_index.construct_ngram(1)
+inverted_index.construct_ngram(2)
 
 '''Monogram'''
 mono_words = inverted_index.get_mono_words()
-inverted_index.construct_monogram()
+#inverted_index.construct_monogram()
 
 print(len(mono_words), mono_words)
 print(inverted_index.monogram, "\n")
@@ -58,7 +60,7 @@ print(inverted_index.monogram, "\n")
 
 '''Bigram'''
 bi_words = inverted_index.get_bi_words()
-inverted_index.construct_bigram()
+#inverted_index.construct_bigram()
 
 print(len(bi_words), bi_words)
 print(inverted_index.bigram, "\n")
