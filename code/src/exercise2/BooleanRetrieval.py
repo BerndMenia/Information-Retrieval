@@ -5,7 +5,7 @@ class BooleanRetrieval:
         self.query_parser = QueryParser()
 
     '''
-    TODO
+    TODO for nested bool queries
     push query string on stack
     pop an process step by step
     '''
@@ -27,28 +27,28 @@ class BooleanRetrieval:
                 token2 = self.query_parser.parse_query(token2)
 
                 # get index entry for word1 and word2
-                index_token1 = inverted_index.query3(token1[0])
+                index_token1 = inverted_index.query2(token1[0])
                 if not index_token1:
-                    index_token1 = []
-                index_token2 = inverted_index.query3(token2[0])
+                    index_token1 = {}
+                index_token2 = inverted_index.query2(token2[0])
                 if not index_token2:
-                    index_token2 = []
+                    index_token2 = {}
 
                 if index_token1 and index_token2:
                     # get posting lists for word1 and word2
-                    entry_token1 = index_token1[1]
+                    entry_token1 = index_token1.get(token1)
                     postings_token1 = [i[0] for i in entry_token1]
                     postings_token1 = list(dict.fromkeys(postings_token1))
                     print("postings of "+query_string_list[0])
                     print(postings_token1)
 
-                    entry_token2 = index_token2[1]
+                    entry_token2 = index_token2.get(token2)
                     postings_token2 = [i[0] for i in entry_token2]
                     postings_token2 = list(dict.fromkeys(postings_token2))
                     print("postings of "+query_string_list[2])
                     print(postings_token2)
                 elif index_token1 and not index_token2:
-                    entry_token1 = index_token1[1]
+                    entry_token1 = index_token1.get(token1)
                     postings_token1 = [i[0] for i in entry_token1]
                     postings_token1 = list(dict.fromkeys(postings_token1))
                     print("postings of " + query_string_list[0])
@@ -63,7 +63,7 @@ class BooleanRetrieval:
                     print("postings of " + query_string_list[0])
                     print(postings_token1)
 
-                    entry_token2 = index_token2[1]
+                    entry_token2 = index_token2.get(token2)
                     postings_token2 = [i[0] for i in entry_token2]
                     postings_token2 = list(dict.fromkeys(postings_token2))
                     print("postings of " + query_string_list[2])

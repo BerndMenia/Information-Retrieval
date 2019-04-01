@@ -25,3 +25,21 @@ class Helper:
                 query_list.append(row[i])
 
         return query_list
+
+    def get_relevent_docs(self, row_num):
+        file_path = abspath("../../../resources/queries.csv")
+
+        with open(file_path) as csvfile:
+            readCSV = csv.reader(csvfile, delimiter=',')
+            num_relevant_docs=0
+            for row in readCSV:
+                num_relevant_docs = len(row[row_num]-2)
+                break
+
+        return num_relevant_docs
+
+    def get_relevant_retrieved_docs(self):
+        return
+
+    def get_total_retrieved_docs(self):
+        return
