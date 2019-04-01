@@ -4,9 +4,6 @@ from code.src.exercise2.BooleanRetrieval import BooleanRetrieval
 from code.src.exercise2.Measures import Measures
 from code.src.exercise2.Helper import Helper
 
-
-# text = "Such an analysis can reveal features that are not easily visible from the variations in the individual genes and can lead to a picture of expression that is more biologically transparent and accessible to interpretation"
-
 helper = Helper()
 #list_file_paths = helper.get_documents() # TODO: NOTE: the get_documents function returns all files contained in the files directiory, for testing purposes by now we just use file 1 and 2
 list_file_paths = ["files/1.txt", "files/2.txt"]
@@ -14,7 +11,7 @@ inverted_index = InvertedIndex()
 count = 1 # The document counter
 
 #for file_path in list_file_paths:
-for i in range(1, 1401):
+for i in range(1, 11):
     file_path = "files/" + str(i) + ".txt"
     print("Indexing file: " + file_path)
 
@@ -95,17 +92,15 @@ print(sample_query)
 
 helper.load_json_to_dict()
 
-test_query = "theoretical OR problem"
-#test_query = "construct OR model"
+test_query = "theoretical OR problem" # TODO: NOTE: using this query I get the error that the index_token1 has no attribute get - index_token1 is constructed using query2()
+#test_query = "construct OR model" # TODO: NOTE: using this query I get the error that the key 'construct' is not found
 # TODO: NOTE: this was just for testing the boolean retrieval since such queries are not given in queries.csv ?
 bool_retrieval = BooleanRetrieval()
 bool_retrieval.bool_search(test_query, inverted_index)
 
-# calculate similarity measure (ex 2.d) and evaluation measures (ex 2.3)
+# calculate similarity and evaluation measures
 measures = Measures()
-# sim_result = measures.sim("We have some problem, a problem of theoretical nature, nonsense - it's just a test", tokenizer.read_in(file_path)) #TODO: NOTE: the first parameter of sim() should be a query out of queries.csv. For testing purposes I just wrote down that meaningless string
-
-sim_result = measures.sim(test_query, tokenizer.read_in(list_file_paths[1]))
+sim_result = measures.sim(sample_query, tokenizer.read_in(list_file_paths[1]))
 print("Similarity: ", sim_result, "\n")
 
 sim_result1 = measures.sim(query_list[0], tokenizer.read_in("files/184.txt"))
@@ -118,7 +113,6 @@ print("Similarity2: ", sim_result2)
 print("Similarity3: ", sim_result3)
 print("Similarity4: ", sim_result4)
 print("Similarity5: ", sim_result5)
-
 
 # TODO: unsure about the parameters for precision and recall - i think we need the overall set of postings for the corresponding document together with the set of postings specific for our query
 relevant_docs = [] # TODO: parameter in queries csv

@@ -41,7 +41,6 @@ class InvertedIndex:
 
         # Iterate over the document and insert each word into the Inverted Index
         for i in range(len(document)):
-            #s = self.porter_stemmer.stem(document[i])
             s = document[i]
 
             # Just for testing, can ignore.
