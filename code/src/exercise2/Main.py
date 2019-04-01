@@ -74,13 +74,26 @@ end = time.time()
 inverted_index_time = end-start
 
 print("Finished indexing!")
-print("Time to index", inverted_index_time, "seconds. \n")
 #print("Inverted Index:", inverted_index.index2, "\n")
 
 
+ngram1_time_start = time.time()
 inverted_index.construct_ngram(1)
+ngram1_time_end = time.time()
+
+ngram2_time_start = time.time()
 inverted_index.construct_ngram(2)
+ngram2_time_end = time.time()
+
+ngram3_time_start = time.time()
 inverted_index.construct_ngram(3)
+ngram3_time_end = time.time()
+
+print("Index    construction time:", inverted_index_time, "seconds. \n")
+print("Monogram construction time:", ngram1_time_end-ngram1_time_start, "seconds")
+print("Bigram   construction time:", ngram2_time_end-ngram2_time_start, "seconds")
+print("Trigram  construction time:", ngram3_time_end-ngram3_time_start, "seconds\n")
+
 
 '''Monogram'''
 mono_words = inverted_index.get_nwords(1)
