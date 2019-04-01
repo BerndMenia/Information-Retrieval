@@ -4,6 +4,8 @@ from code.src.exercise2.BooleanRetrieval import BooleanRetrieval
 from code.src.exercise2.Measures import Measures
 from code.src.exercise2.Helper import Helper
 
+# TODO: NOTE: when running Main - the computation takes much too long due to the time consuming matrix construction in Helper - this needs to be fixed
+
 helper = Helper()
 #list_file_paths = helper.get_documents() # TODO: NOTE: the get_documents function returns all files contained in the files directiory, for testing purposes by now we just use file 1 and 2
 list_file_paths = ["files/1.txt", "files/2.txt"]
@@ -90,8 +92,6 @@ query_list = helper.get_sample_queries()
 sample_query = query_list[0]
 print(sample_query)
 
-helper.load_json_to_dict()
-
 test_query = "theoretical OR problem" # TODO: NOTE: using this query I get the error that the index_token1 has no attribute get - index_token1 is constructed using query2()
 #test_query = "construct OR model" # TODO: NOTE: using this query I get the error that the key 'construct' is not found
 # TODO: NOTE: this was just for testing the boolean retrieval since such queries are not given in queries.csv ?
@@ -139,3 +139,5 @@ query1 = query_list[0]
 print(len(measures.documents))
 print(measures.documents[0])
 print(measures.documents[1])
+
+#helper.get_term_doc_matrix(helper.get_term_doc_vector(), sample_query)
