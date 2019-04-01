@@ -193,7 +193,9 @@ class InvertedIndex:
 
     # The new query
     def query2(self, to_search):
-        return self.index2[self.porter_stemmer.stem(to_search)]
+        if self.index2:
+            return self.index2[self.porter_stemmer.stem(to_search)]
+        return []
 
 
     # Dummy query while bool_search() gets updated to query2()
