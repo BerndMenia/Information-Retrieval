@@ -1,5 +1,8 @@
+import bisect
+
 from code.src.exercise2.QueryParser import QueryParser
 from code.src.exercise2.Helper import Helper
+
 
 class Measures:
     def __init__(self):
@@ -38,9 +41,11 @@ class Measures:
         else:
             return 0
 
-
     def query_sim(self, query):
         similarities = []
 
-        for document in self.documents:
-            x = 1
+        for i in range(1, len(self.documents)+1):
+            sim = self.sim(query, self.documents[i-1])
+            similarities.append( (i, sim) )
+
+        return similarities

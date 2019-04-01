@@ -1,3 +1,6 @@
+import operator
+import time
+
 from code.src.exercise1.Tokenizer import Tokenizer
 from code.src.exercise2.InvertedIndex import InvertedIndex
 from code.src.exercise2.BooleanRetrieval import BooleanRetrieval
@@ -11,9 +14,14 @@ inverted_index = InvertedIndex()
 count = 1 # The document counter
 
 #for file_path in list_file_paths:
-for i in range(1, 11):
+
+
+#---------------From exercise 2!---------------------#
+
+'''
+for i in range(1, 1401):
     file_path = "files/" + str(i) + ".txt"
-    print("Indexing file: " + file_path)
+    #print("Indexing file: " + file_path)
 
     # preprocess input text
     tokenizer = Tokenizer()
@@ -42,8 +50,33 @@ for i in range(1, 11):
     inverted_index.text_list = text_prep_punct     # As of now this statement is actually useless because we don't utilized classes as they should be, but /we : P.
     inverted_index.add_document2(text_prep_stem, count)
     count += 1
+'''
 
-print(inverted_index.index2)
+
+#---------------For exercise 3------------------#
+
+documents = helper.load_documents()
+tokenizer = Tokenizer()
+
+print("Indexing files...")
+start = time.time()
+
+for i in range(1, 1401):
+    string = documents[i-1]
+    tokens = tokenizer.tokenize_text(string)
+    text_prep_punct = tokenizer.remove_punctuation(tokens)
+    text_prep_stop = tokenizer.remove_stopwords(text_prep_punct)
+    text_prep_stem = tokenizer.stem_words(text_prep_stop)
+    inverted_index.add_document2(text_prep_stem, count)
+    count += 1
+
+end = time.time()
+inverted_index_time = end-start
+
+print("Finished indexing!")
+print("Time to index", inverted_index_time, "seconds. \n")
+#print("Inverted Index:", inverted_index.index2, "\n")
+
 
 inverted_index.construct_ngram(1)
 inverted_index.construct_ngram(2)
@@ -53,22 +86,22 @@ inverted_index.construct_ngram(3)
 mono_words = inverted_index.get_nwords(1)
 #inverted_index.construct_monogram()
 
-print(len(mono_words), mono_words)
-print(inverted_index.monogram, "\n")
+#print(len(mono_words), mono_words)
+#print(inverted_index.monogram, "\n")
 
 
 '''Bigram'''
 bi_words = inverted_index.get_nwords(2)
 #inverted_index.construct_bigram()
 
-print(len(bi_words), bi_words)
-print(inverted_index.bigram, "\n")
+#print(len(bi_words), bi_words)
+#print(inverted_index.bigram, "\n")
 
 
 '''Trigram'''
 tri_words = inverted_index.get_nwords(3)
-print(len(tri_words), tri_words)
-print(inverted_index.trigram, "\n")
+#print(len(tri_words), tri_words)
+#print(inverted_index.trigram, "\n")
 
 
 '''Query ngrams'''
@@ -134,8 +167,14 @@ print()
 
 #-----------------------Measurements-----------------------#
 
-query1 = query_list[0]
+query1 = query_list[3]
 
-print(len(measures.documents))
-print(measures.documents[0])
-print(measures.documents[1])
+print("Amount documents:", len(measures.documents))
+#sim_query1 = measures.query_sim(query1)
+
+# https://stackoverflow.com/questions/8459231/sort-tuples-based-on-second-parameter
+#sim_query1.sort(key=operator.itemgetter(1), reverse=True)
+#n = len(sim_query1)
+
+#for i in range(20):
+#    print(sim_query1[i])
