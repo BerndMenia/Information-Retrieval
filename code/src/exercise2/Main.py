@@ -6,6 +6,7 @@ from code.src.exercise2.InvertedIndex import InvertedIndex
 from code.src.exercise2.BooleanRetrieval import BooleanRetrieval
 from code.src.exercise2.Measures import Measures
 from code.src.exercise2.Helper import Helper
+from code.src.exercise3.VectorSpaceModel import VectorSpaceModel
 
 # TODO: NOTE: when running Main - the computation takes much too long due to the time consuming matrix construction in Helper - this needs to be fixed
 
@@ -14,6 +15,8 @@ helper = Helper()
 list_file_paths = ["files/1.txt", "files/2.txt"]
 inverted_index = InvertedIndex()
 count = 1 # The document counter
+
+vsm = VectorSpaceModel()
 
 #for file_path in list_file_paths:
 
@@ -195,3 +198,6 @@ print("Amount documents:", len(measures.documents))
 
 
 #helper.get_term_doc_matrix(helper.get_term_doc_vector(), sample_query)
+
+
+vsm.calc_tf_idf(sample_query)

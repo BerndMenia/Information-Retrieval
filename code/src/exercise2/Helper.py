@@ -55,6 +55,19 @@ class Helper:
 
         return document_dict
 
+    def get_term_doc_matrix_rows(self, doc_dict, query):
+        query = self.query_parser.parse_query(query)
+        list_word_vectors = []
+        for doc_id, doc_body in doc_dict.items():
+            list_word_vectors.append(doc_body)
+        list_word_vectors.append(query)
+
+        list_matrix_rows = []
+        for vec in list_word_vectors:
+            list_matrix_rows = list(set().union(list_matrix_rows, vec))
+
+        return list_matrix_rows
+
     # return a matrix with column-count=document-count and row-count=unique-terms-count-of-all-documents
     # the matrix is filled with 0 and 1
     # 0 for each term not contained in the corresponding document
