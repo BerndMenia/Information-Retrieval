@@ -47,13 +47,36 @@ class Helper:
         file_path = abspath("../../../resources/queries.csv")
 
         with open(file_path) as csvfile:
-            readCSV = csv.reader(csvfile, delimiter=',')
-            num_relevant_docs=0
-            for row in readCSV:
-                num_relevant_docs = len(row[row_num]-2)
-                break
+            read_csv = csv.reader(csvfile, delimiter=',')
+            list_csv = list(read_csv)
 
-        return num_relevant_docs
+            #print(type(readCSV))
+            #print(readCSV)
+
+            if 0 < row_num < len(list_csv):
+                n = len(list_csv[row_num-1])
+
+                if (n - 1) % 2 == 0:
+                    return (n - 1) // 2
+
+            #for row in readCSV:
+            #    print(row)
+            #    print(row[0])
+            #    print(row[0], row[1], row[2], )
+
+            '''
+            n = len(readCSV[row_num])
+
+            if (n-1) % 2 == 0:
+                return (n-1) / 2
+            return 0
+            '''
+            #for row in readCSV:
+            #    num_relevant_docs = len(row[row_num]-2)
+            #    break
+
+        # Return -1 if an error occurred.
+        return -1
 
     def get_relevant_retrieved_docs(self):
         return
