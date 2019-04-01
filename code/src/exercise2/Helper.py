@@ -1,4 +1,5 @@
 import csv
+import json
 from os.path import abspath
 
 class Helper:
@@ -25,3 +26,37 @@ class Helper:
                 query_list.append(row[i])
 
         return query_list
+
+    def load_json_to_dict(self):
+        json_path = abspath("../../../resources/cranfield-data-list.json")
+        with open(json_path, 'r') as f:
+            cranfield_dict = json.load(f)
+
+        document_filenames_dict = {}
+        for cranfield in cranfield_dict:
+            doc_id = cranfield['id']
+            doc_txt = "/files/%d.txt" % (doc_id)
+            document_filenames_dict[doc_id] = doc_txt
+
+        return document_filenames_dict
+
+
+    # ----------------------------------------- MEASURES ----------------------------------------- #
+
+    def get_relevent_docs(self, row_num):
+        file_path = abspath("../../../resources/queries.csv")
+
+        with open(file_path) as csvfile:
+            readCSV = csv.reader(csvfile, delimiter=',')
+            num_relevant_docs=0
+            for row in readCSV:
+                num_relevant_docs = len(row[row_num]-2)
+                break
+
+        return num_relevant_docs
+
+    def get_relevant_retrieved_docs(self):
+        return
+
+    def get_total_retrieved_docs(self):
+        return

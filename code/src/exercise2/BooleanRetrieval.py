@@ -35,14 +35,19 @@ class BooleanRetrieval:
                     index_token2 = []
 
                 if index_token1 and index_token2:
+                    # entry_token1 and 2 are not used anymore --> index_token1 and 2
+                    # can be used directly instead I think.
+                    entry_token1 = index_token1
+                    entry_token2 = index_token2
+
                     # get posting lists for word1 and word2
-                    entry_token1 = index_token1[1]
+                    #entry_token1 = index_token1[1]
                     postings_token1 = [i[0] for i in entry_token1]
                     postings_token1 = list(dict.fromkeys(postings_token1))
                     print("postings of "+query_string_list[0])
                     print(postings_token1)
 
-                    entry_token2 = index_token2[1]
+                    #entry_token2 = index_token2[1]
                     postings_token2 = [i[0] for i in entry_token2]
                     postings_token2 = list(dict.fromkeys(postings_token2))
                     print("postings of "+query_string_list[2])

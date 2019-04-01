@@ -91,8 +91,12 @@ print("------------------------------------------------------------------------\
 # here we get the first query out of queries.csv
 query_list = helper.get_sample_queries()
 sample_query = query_list[0]
+print(sample_query)
+
+helper.load_json_to_dict()
 
 test_query = "theoretical OR problem"
+#test_query = "construct OR model"
 # TODO: NOTE: this was just for testing the boolean retrieval since such queries are not given in queries.csv ?
 bool_retrieval = BooleanRetrieval()
 bool_retrieval.bool_search(test_query, inverted_index)
@@ -117,6 +121,9 @@ print("Similarity5: ", sim_result5)
 
 
 # TODO: unsure about the parameters for precision and recall - i think we need the overall set of postings for the corresponding document together with the set of postings specific for our query
+relevant_docs = [] # TODO: parameter in queries csv
+retrieved_relevant_docs = [] # TODO: count of retrieved postings with relation to the actually relevant docs out of queries csv
+total_retrieved_docs = [] # TODO: count of retrieved postings
 recall_measure = measures.recall([], [])
 print("Recall: ", recall_measure)
 precision_measure = measures.precision([], [])
