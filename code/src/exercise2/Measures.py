@@ -1,8 +1,10 @@
 from code.src.exercise2.QueryParser import QueryParser
+from code.src.exercise2.Helper import Helper
 
 class Measures:
     def __init__(self):
         self.query_parser = QueryParser()
+        self.documents = Helper().load_documents()
 
     def sim(self, query, document):
         query_tokens = self.query_parser.parse_query(query)
@@ -35,3 +37,10 @@ class Measures:
             return 2*precision_score*recall_score / (precision_score+recall_score)
         else:
             return 0
+
+
+    def query_sim(self, query):
+        similarities = []
+
+        for document in self.documents:
+            x = 1

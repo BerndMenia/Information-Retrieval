@@ -130,3 +130,12 @@ print(helper.get_relevent_docs(2))
 print(helper.get_relevent_docs(3))
 print(helper.get_relevent_docs(4))
 print(helper.get_relevent_docs(5))
+print()
+
+#-----------------------Measurements-----------------------#
+
+query1 = query_list[0]
+
+print(len(measures.documents))
+print(measures.documents[0])
+print(measures.documents[1])

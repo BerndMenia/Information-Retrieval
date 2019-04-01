@@ -2,7 +2,11 @@ import csv
 import json
 from os.path import abspath
 
+from code.src.exercise1.Tokenizer import Tokenizer
+
+
 class Helper:
+
     def get_documents(self):
         document_list = []
         path = "/files/"
@@ -13,6 +17,11 @@ class Helper:
             document_list.append(doc)
 
         return document_list
+
+    def load_documents(self):
+        document_paths = self.get_documents()
+        tokenizer = Tokenizer()
+        return [tokenizer.read_in(document_path) for document_path in document_paths]
 
     def get_sample_queries(self):
         file_path = abspath("../../../resources/queries.csv")
