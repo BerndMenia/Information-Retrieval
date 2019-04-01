@@ -49,6 +49,7 @@ class Helper:
         with open(file_path) as csvfile:
             read_csv = csv.reader(csvfile, delimiter=',')
             list_csv = list(read_csv)
+
             if 0 < row_num < len(list_csv):
                 n = len(list_csv[row_num-1])
 

@@ -7,14 +7,13 @@ class Measures:
     def sim(self, query, document):
         query_tokens = self.query_parser.parse_query(query)
         document_tokens = self.query_parser.parse_query(document)
+        count = 0
 
-        # Can be a simple counter instead of a list.
-        similarities = []
         for query_token in query_tokens:
             if query_token in document_tokens:
-                similarities.append(query_token)
+                count += 1
 
-        return len(similarities) / len(query_tokens)
+        return count / len(query_tokens)
 
     # Recall = No. of relevant documents retrieved / No. of total relevant documents
     def recall(self, total_relevant_documents, relevant_documents):
