@@ -122,6 +122,30 @@ class Helper:
         # Return -1 if an error occurred.
         return -1
 
+
+    def get_relevant_docs_ids(self, row_num):
+        file_path = abspath("../../../resources/queries.csv")
+        relevant_docs = []
+
+        with open(file_path) as csvfile:
+            read_csv = csv.reader(csvfile, delimiter=',')
+            list_csv = list(read_csv)
+
+            if 0 < row_num < len(list_csv):
+                query_list = list_csv[row_num - 1]
+                n = len(query_list)
+
+                if (n - 1) % 2 == 0:
+                    for i in range(1, n, 2):
+                        try:
+                            relevant_docs.append(int(query_list[i]))
+                        except ValueError:
+                            pass
+
+
+        # Return the empty list if an error occurred.
+        return relevant_docs
+
     def get_relevant_retrieved_docs(self):
         return
 

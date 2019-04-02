@@ -1,5 +1,7 @@
 import operator
 import time
+import random
+from string import ascii_lowercase
 
 from code.src.exercise1.Tokenizer import Tokenizer
 from code.src.exercise2.InvertedIndex import InvertedIndex
@@ -81,23 +83,18 @@ inverted_index_time = end-start
 print("Finished indexing!")
 #print("Inverted Index:", inverted_index.index2, "\n")
 
+ngram_construction_times = []
 
-ngram1_time_start = time.time()
-inverted_index.construct_ngram(1)
-ngram1_time_end = time.time()
+for i in range(1, 4):
+    start = time.time()
+    inverted_index.construct_ngram(i)
+    end = time.time()
+    ngram_construction_times.append(end-start)
 
-ngram2_time_start = time.time()
-inverted_index.construct_ngram(2)
-ngram2_time_end = time.time()
-
-ngram3_time_start = time.time()
-inverted_index.construct_ngram(3)
-ngram3_time_end = time.time()
-
-print("Index    construction time:", inverted_index_time, "seconds. \n")
-print("Monogram construction time:", ngram1_time_end-ngram1_time_start, "seconds")
-print("Bigram   construction time:", ngram2_time_end-ngram2_time_start, "seconds")
-print("Trigram  construction time:", ngram3_time_end-ngram3_time_start, "seconds\n")
+print("Index    construction time:", inverted_index_time, "seconds.")
+print("Monogram construction time:", ngram_construction_times[0], "seconds")
+print("Bigram   construction time:", ngram_construction_times[1], "seconds")
+print("Trigram  construction time:", ngram_construction_times[2], "seconds\n")
 
 
 '''Monogram'''
@@ -136,6 +133,39 @@ print("Searching for my:")
 print(inverted_index.query_ngram("my"))
 print("------------------------------------------------------------------------\n")
 
+
+#---------------------Query ngrams for measurement----------------#
+ngram1_times = []
+ngram2_times = []
+ngram3_times = []
+n = 100
+
+for i in range(n):
+    s1 = random.choice(ascii_lowercase)
+    s2 = random.choice(ascii_lowercase)
+    s3 = random.choice(ascii_lowercase)
+
+    #print(query)
+    start = time.time()
+    inverted_index.query_ngram(s1)
+    end = time.time()
+    ngram1_times.append(end-start)
+
+    start = time.time()
+    inverted_index.query_ngram(s1 + s2)
+    end = time.time()
+    ngram2_times.append(end - start)
+
+    start = time.time()
+    inverted_index.query_ngram(s1 + s2 + s3)
+    end = time.time()
+    ngram3_times.append(end - start)
+
+print("Monogram average query time:", sum(ngram1_times) / n)
+print("Bigram   average query time:", sum(ngram2_times) / n)
+print("Trigram  average query time:", sum(ngram3_times) / n, "\n")
+
+
 # here we get the first query out of queries.csv
 query_list = helper.get_sample_queries()
 sample_query = query_list[0]
@@ -169,11 +199,12 @@ retrieved_relevant_docs = [] # TODO: count of retrieved postings with relation t
 total_retrieved_docs = [] # TODO: count of retrieved postings
 recall_measure = measures.recall([], [])
 print("Recall: ", recall_measure)
-precision_measure = measures.precision([], [])
+precision_measure = measures.precision(1, [])
 print("Precision:", precision_measure)
 f1_score = measures.f1score(recall_measure, precision_measure)
-print("F1-score: ", f1_score)
+print("F1-score: ", f1_score, "\n")
 
+print("Number of relevant documents:")
 print(helper.get_relevent_docs(1))
 print(helper.get_relevent_docs(2))
 print(helper.get_relevent_docs(3))
@@ -183,17 +214,24 @@ print()
 
 #-----------------------Measurements-----------------------#
 
-query1 = query_list[3]
+row_num1 = 4
+query1 = query_list[row_num1]
 
 print("Amount documents:", len(measures.documents))
-#sim_query1 = measures.query_sim(query1)
+sim_query1 = measures.query_sim(query1)
 
 # https://stackoverflow.com/questions/8459231/sort-tuples-based-on-second-parameter
-#sim_query1.sort(key=operator.itemgetter(1), reverse=True)
-#n = len(sim_query1)
+sim_query1.sort(key=operator.itemgetter(1), reverse=True)
+n = len(sim_query1)
 
-#for i in range(20):
-#    print(sim_query1[i])
+sim_query1_cut = [sim_query1[i] for i in range(20) if i < n]
+print("Hi:", sim_query1_cut)
+
+
+print("Precision for query", row_num1, ":", measures.precision(row_num1, sim_query1_cut))
+
+for i in range(20):
+    print(sim_query1[i])
 
 
 
