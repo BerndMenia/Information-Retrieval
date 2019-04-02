@@ -200,4 +200,3 @@ print("Amount documents:", len(measures.documents))
 #helper.get_term_doc_matrix(helper.get_term_doc_vector(), sample_query)
 
 
-vsm.calc_tf_idf(sample_query, inverted_index)
