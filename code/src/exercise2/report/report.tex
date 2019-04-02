@@ -22,98 +22,207 @@
 % https://tex.stackexchange.com/questions/183622/reduce-vertical-size-of-tikz-plot
 % https://tex.stackexchange.com/questions/65221/how-to-remove-pgfplots-circular-points
 \begin{document}
-	\begin{figure}[h]
-		\centering
-		\caption{
-			Precision1
-		}
-		\label{plot:Plot1}
-		
-		\begin{tikzpicture}	
-		\begin{axis}[
-			width = \textwidth,
-			height = 0.5\textwidth,
-			xtick pos = left,
-			xlabel = K,
-			ylabel = Precision,
-			%ybar = 5pt,
-			%bar width = 7pt,
-			ymin = 0, 
-			grid = major,
-			grid style={dashed,gray!30}
-		]
-		
-		\addplot table [
-			mark = none,
-			x = K,
-			y = Precision,
-			col sep = comma
-		] {./graphs/Precision1.csv};
-		
-		\addplot table [
-			mark = none,
-			x = K,
-			y = Precision,
-			col sep = comma
-		] {./graphs/Precision1.csv};
-		
-		
-		\end{axis}
-		\end{tikzpicture}
-	\end{figure}
+	
+% General: https://www.latex-tutorial.com/tutorials/pgfplots/
+% Colors:  https://tex.stackexchange.com/questions/188131/how-to-change-color-at-line-chart
+% Legend:  https://tex.stackexchange.com/questions/68299/adding-a-legend-entry-to-a-plot
+% Dashe:   https://tex.stackexchange.com/questions/45275/tikz-get-values-for-predefined-dash-patterns
+% Opacity: https://tex.stackexchange.com/questions/39037/tikz-use-opacity-for-fill-yet-leave-draw-lines-untouched
+\begin{figure}[h]
+	\centering
+	\caption{
+		Precision, Recall and F1Score for \textbf{query 1} with respect to @k measurement. 
+	}
+	\label{plot:Query1}
+	
+	\begin{tikzpicture}% coordinates
+	\begin{axis} [
+		width = \linewidth,
+		grid=major,
+		xlabel = K,
+		ylabel = Score,
+		legend pos = south east
+	]
+	
+	% Original Example validation accuracy
+	\addplot[black, line width = 0.5mm] table [
+		x = K, 
+		y = Precision, 
+		col sep=comma,
+	] {./graphs/Precision1.csv};
+	
+	
+	% SGD validation accuracy
+	\addplot[red, line width = 0.5mm] table [
+		x = K, 
+		y = Recall, 
+		col sep=comma,
+	] {./graphs/Recall1.csv};
+	
+	
+	% Kernel Regularizer
+	\addplot[cgreen, line width = 0.5mm] table [
+		x = K, 
+		y = F1Score, 
+		col sep=comma,
+	] {./graphs/F1Score1.csv};
+	
+	\addlegendentry{Precision}
+	\addlegendentry{Recall}
+	\addlegendentry{F1Score}
+	
+	\end{axis}
+	\end{tikzpicture}
+\end{figure}
 
+
+
+
+\begin{figure}[h]
+	\centering
+	\caption{
+		Precision, Recall and F1Score for \textbf{query 2} with respect to @k measurement. 
+	}
+	\label{plot:Query2}
+	
+	\begin{tikzpicture}% coordinates
+	\begin{axis} [
+	width = \linewidth,
+	grid=major,
+	xlabel = K,
+	ylabel = Score,
+	legend pos = south east
+	]
+	
+	% Original Example validation accuracy
+	\addplot[black, line width = 0.5mm] table [
+	x = K, 
+	y = Precision, 
+	col sep=comma,
+	] {./graphs/Precision2.csv};
 	
 	
-	% General: https://www.latex-tutorial.com/tutorials/pgfplots/
-	% Colors:  https://tex.stackexchange.com/questions/188131/how-to-change-color-at-line-chart
-	% Legend:  https://tex.stackexchange.com/questions/68299/adding-a-legend-entry-to-a-plot
-	% Dashe:   https://tex.stackexchange.com/questions/45275/tikz-get-values-for-predefined-dash-patterns
-	% Opacity: https://tex.stackexchange.com/questions/39037/tikz-use-opacity-for-fill-yet-leave-draw-lines-untouched
-	\begin{figure}[h]
-		\centering
-		\caption{
-			Plotttttt
-		}
-		\label{plot:Plot2}
-		
-		\begin{tikzpicture}% coordinates
-		\begin{axis} [
-			width = \linewidth,
-			grid=major,
-			xlabel = K,
-			ylabel = Score,
-			legend pos = south east
-		]
-		
-		% Original Example validation accuracy
-		\addplot[black, line width = 0.5mm] table [
-			x = K, 
-			y = Precision, 
-			col sep=comma,
-		] {./graphs/Precision1.csv};
-		
-		
-		% SGD validation accuracy
-		\addplot[red, line width = 0.5mm] table [
-			x = K, 
-			y = Recall, 
-			col sep=comma,
-		] {./graphs/Recall1.csv};
-		
-		
-		% Kernel Regularizer
-		\addplot[cgreen, line width = 0.5mm] table [
-			x = K, 
-			y = F1Score, 
-			col sep=comma,
-		] {./graphs/F1Score1.csv};
-		
-		\addlegendentry{Precision}
-		\addlegendentry{Recall}
-		\addlegendentry{F1Score}
-		
-		\end{axis}
-		\end{tikzpicture}
-	\end{figure}
+	% SGD validation accuracy
+	\addplot[red, line width = 0.5mm] table [
+	x = K, 
+	y = Recall, 
+	col sep=comma,
+	] {./graphs/Recall2.csv};
+	
+	
+	% Kernel Regularizer
+	\addplot[cgreen, line width = 0.5mm] table [
+	x = K, 
+	y = F1Score, 
+	col sep=comma,
+	] {./graphs/F1Score2.csv};
+	
+	\addlegendentry{Precision}
+	\addlegendentry{Recall}
+	\addlegendentry{F1Score}
+	
+	\end{axis}
+	\end{tikzpicture}
+\end{figure}
+
+
+
+
+\begin{figure}[h]
+	\centering
+	\caption{
+		Precision, Recall and F1Score for \textbf{query 3} with respect to @k measurement. 
+	}
+	\label{plot:Query3}
+	
+	\begin{tikzpicture}% coordinates
+	\begin{axis} [
+	width = \linewidth,
+	grid=major,
+	xlabel = K,
+	ylabel = Score,
+	legend pos = south east
+	]
+	
+	% Original Example validation accuracy
+	\addplot[black, line width = 0.5mm] table [
+	x = K, 
+	y = Precision, 
+	col sep=comma,
+	] {./graphs/Precision3.csv};
+	
+	
+	% SGD validation accuracy
+	\addplot[red, line width = 0.5mm] table [
+	x = K, 
+	y = Recall, 
+	col sep=comma,
+	] {./graphs/Recall3.csv};
+	
+	
+	% Kernel Regularizer
+	\addplot[cgreen, line width = 0.5mm] table [
+	x = K, 
+	y = F1Score, 
+	col sep=comma,
+	] {./graphs/F1Score3.csv};
+	
+	\addlegendentry{Precision}
+	\addlegendentry{Recall}
+	\addlegendentry{F1Score}
+	
+	\end{axis}
+	\end{tikzpicture}
+\end{figure}
+
+
+
+
+\begin{figure}[h]
+	\centering
+	\caption{
+		Precision, Recall and F1Score for \textbf{query 4} with respect to @k measurement. 
+	}
+	\label{plot:Query4}
+	
+	\begin{tikzpicture}% coordinates
+	\begin{axis} [
+	width = \linewidth,
+	grid=major,
+	xlabel = K,
+	ylabel = Score,
+	legend pos = south east
+	]
+	
+	% Original Example validation accuracy
+	\addplot[black, line width = 0.5mm] table [
+	x = K, 
+	y = Precision, 
+	col sep=comma,
+	] {./graphs/Precision4.csv};
+	
+	
+	% SGD validation accuracy
+	\addplot[red, line width = 0.5mm] table [
+	x = K, 
+	y = Recall, 
+	col sep=comma,
+	] {./graphs/Recall4.csv};
+	
+	
+	% Kernel Regularizer
+	\addplot[cgreen, line width = 0.5mm] table [
+	x = K, 
+	y = F1Score, 
+	col sep=comma,
+	] {./graphs/F1Score4.csv};
+	
+	\addlegendentry{Precision}
+	\addlegendentry{Recall}
+	\addlegendentry{F1Score}
+	
+	\end{axis}
+	\end{tikzpicture}
+\end{figure}
 	
 \end{document}
