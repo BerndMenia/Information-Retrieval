@@ -81,7 +81,30 @@ end = time.time()
 inverted_index_time = end-start
 
 print("Finished indexing!")
+print("------------------------------------------------------------------------\n")
 #print("Inverted Index:", inverted_index.index2, "\n")
+
+count = 0
+for key in inverted_index.index2.keys():
+    if count > 1:
+        break
+    print(key, ":", inverted_index.index2[key])
+    count += 1
+
+print()
+
+
+'''Inverted Index query times'''
+index_times = []
+
+for i in range(100):
+    start = time.time()
+    random_word = random.choice(list(inverted_index.index2.keys()))
+    inverted_index.query2(random_word)
+    end = time.time()
+    index_times.append(end-start)
+
+#--------------------------ngrams------------------------------------#
 
 ngram_construction_times = []
 
@@ -99,25 +122,45 @@ print("Trigram  construction time:", ngram_construction_times[2], "seconds\n")
 
 '''Monogram'''
 mono_words = inverted_index.get_nwords(1)
-#inverted_index.construct_monogram()
+print("Monogram length:", len(mono_words))
+count = 0
 
-#print(len(mono_words), mono_words)
-#print(inverted_index.monogram, "\n")
+for key in inverted_index.monogram.keys():
+    if count > 5:
+        break
+    #print(key, ":", inverted_index.monogram[key])
+    count += 1
+
+print(mono_words)
+print("\n")
 
 
 '''Bigram'''
 bi_words = inverted_index.get_nwords(2)
-#inverted_index.construct_bigram()
+print("Bigram length:", len(bi_words), bi_words)
+count = 0
 
-#print(len(bi_words), bi_words)
-#print(inverted_index.bigram, "\n")
+for key in inverted_index.bigram.keys():
+    if count > 5:
+        break
+    print(key, ":", inverted_index.bigram[key])
+    count += 1
+
+print("\n")
 
 
 '''Trigram'''
 tri_words = inverted_index.get_nwords(3)
-#print(len(tri_words), tri_words)
-#print(inverted_index.trigram, "\n")
+print("Trigram length:", len(tri_words), tri_words)
+count = 0
 
+for key in inverted_index.trigram.keys():
+    if count > 5:
+        break
+    print(key, ":", inverted_index.trigram[key])
+    count += 1
+
+print("\n")
 
 '''Query ngrams'''
 print("Searching for e:")
@@ -132,7 +175,6 @@ print(inverted_index.query_ngram("agr"), "\n")
 print("Searching for my:")
 print(inverted_index.query_ngram("my"))
 print("------------------------------------------------------------------------\n")
-
 
 #---------------------Query ngrams for measurement----------------#
 
@@ -162,15 +204,19 @@ for i in range(n):
     end = time.time()
     ngram3_times.append(end - start)
 
+print("Index    average query time:", sum(index_times)  / n)
 print("Monogram average query time:", sum(ngram1_times) / n)
 print("Bigram   average query time:", sum(ngram2_times) / n)
 print("Trigram  average query time:", sum(ngram3_times) / n, "\n")
 
-#----------------------------------------------------------------------#
+#-------------------------Boolean Retrieval---------------------------------------------#
+
 
 # here we get the first query out of queries.csv
 query_list = helper.get_sample_queries()
 sample_query = query_list[0]
+
+'''
 print(sample_query)
 
 test_query = "theoretical OR problem" # TODO: NOTE: using this query I get the error that the index_token1 has no attribute get - index_token1 is constructed using query2()
@@ -178,6 +224,9 @@ test_query = "theoretical OR problem" # TODO: NOTE: using this query I get the e
 # TODO: NOTE: this was just for testing the boolean retrieval since such queries are not given in queries.csv ?
 bool_retrieval = BooleanRetrieval()
 bool_retrieval.bool_search(test_query, inverted_index)
+'''
+
+#-------------------------------Similarity----------------------------------#
 
 # calculate similarity and evaluation measures
 measures = Measures()
@@ -208,16 +257,16 @@ f1_score = measures.f1score(1, [])
 print("F1-score: ", f1_score, "\n")
 
 print("Number of relevant documents:")
-print(helper.get_relevent_docs(1))
-print(helper.get_relevent_docs(2))
-print(helper.get_relevent_docs(3))
-print(helper.get_relevent_docs(4))
-print(helper.get_relevent_docs(5))
+print("Query 1:", helper.get_relevent_docs(1))
+print("Query 2:", helper.get_relevent_docs(2))
+print("Query 3:", helper.get_relevent_docs(3))
+print("Query 4:", helper.get_relevent_docs(4))
+print("Query 5:", helper.get_relevent_docs(5))
 print()
 
 #-----------------------Measurements-----------------------#
 
-'''
+
 row_num1 = 4
 query1 = query_list[row_num1-1]
 
@@ -229,17 +278,19 @@ sim_query1.sort(key=operator.itemgetter(1), reverse=True)
 n = len(sim_query1)
 
 sim_query1_cut = [sim_query1[i] for i in range(20) if i < n]
-print("Hi:", sim_query1_cut)
+#print("Hi:", sim_query1_cut)
 
+print("Similarities for query", row_num1, ":")
+for sim in sim_query1_cut:
+    print(sim)
 
+print()
 print("Precision for query", row_num1, ":", measures.precision(row_num1, sim_query1_cut))
 print("Recall    for query", row_num1, ":", measures.recall(row_num1, sim_query1_cut))
 print("F1 Score  for query", row_num1, ":", measures.f1score(row_num1, sim_query1_cut))
 
-for i in range(20):
-    print(sim_query1[i])
 
-'''
+
 
 print("\n-----------------------------------@k-----------------------------------------\n")
 
@@ -247,6 +298,7 @@ print("\n-----------------------------------@k----------------------------------
 
 k_range = 1
 
+'''
 for row_num in range(1, 5):
     query = query_list[row_num-1]
     print(query)
@@ -263,7 +315,6 @@ for row_num in range(1, 5):
             k = 1
 
         similarities_cut = [similarities[i] for i in range(k) if i < n]
-        print(similarities_cut)
         precision = measures.precision(row_num, similarities_cut)
         recall    = measures.recall(row_num, similarities_cut)
         f1score   = measures.f1score_precalculated(precision, recall)
@@ -279,8 +330,8 @@ for row_num in range(1, 5):
     filePrecision.close()
     fileRecall.close()
     fileF1Score.close()
+'''
 
-
-#helper.get_term_doc_matrix(helper.get_term_doc_vector(), sample_query)
+helper.get_term_doc_matrix(helper.get_term_doc_vector(), sample_query)
 
 

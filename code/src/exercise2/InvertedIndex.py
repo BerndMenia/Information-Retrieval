@@ -191,7 +191,7 @@ class InvertedIndex:
         return ()
 
 
-    # The query because of dafuq
+    # The query because of
     def query_without_stem(self, to_search):
         if self.index2:
             return self.index2[to_search]
@@ -200,8 +200,9 @@ class InvertedIndex:
     # The new query
     def query2(self, to_search):
         if self.index2:
+            to_search = self.porter_stemmer.stem(to_search)
             if to_search in self.index2.keys():
-                return self.index2[self.porter_stemmer.stem(to_search)]
+                return self.index2[to_search]
         return []
 
 
