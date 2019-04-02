@@ -197,11 +197,12 @@ print("Similarity5: ", sim_result5)
 relevant_docs = [] # TODO: parameter in queries csv
 retrieved_relevant_docs = [] # TODO: count of retrieved postings with relation to the actually relevant docs out of queries csv
 total_retrieved_docs = [] # TODO: count of retrieved postings
-recall_measure = measures.recall([], [])
+recall_measure = measures.recall(1, [])
 print("Recall: ", recall_measure)
 precision_measure = measures.precision(1, [])
 print("Precision:", precision_measure)
-f1_score = measures.f1score(recall_measure, precision_measure)
+#f1_score = measures.f1score(recall_measure, precision_measure)
+f1_score = measures.f1score(1, [])
 print("F1-score: ", f1_score, "\n")
 
 print("Number of relevant documents:")
@@ -229,6 +230,8 @@ print("Hi:", sim_query1_cut)
 
 
 print("Precision for query", row_num1, ":", measures.precision(row_num1, sim_query1_cut))
+print("Recall    for query", row_num1, ":", measures.recall(row_num1, sim_query1_cut))
+print("F1 Score  for query", row_num1, ":", measures.f1score(row_num1, sim_query1_cut))
 
 for i in range(20):
     print(sim_query1[i])

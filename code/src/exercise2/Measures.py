@@ -12,6 +12,7 @@ class Measures:
         self.helper = Helper()
         self.documents = self.helper.load_documents()
 
+
     def sim(self, query, document):
         query_tokens = self.query_parser.parse_query(query)
         document_tokens = self.query_parser.parse_query(document)
@@ -38,15 +39,7 @@ class Measures:
         return similarities_new
 
 
-    # Recall = No. of relevant documents retrieved / No. of total relevant documents
-    def recall(self, total_relevant_documents, relevant_documents):
-        if len(total_relevant_documents) > 0:
-            return len(relevant_documents) / len(total_relevant_documents)
-        else:
-            return 0
-
-
-    def precision(self, row_num, similarities):
+    def relevant_intersect_retrieved(self, row_num, similarities):
         if not len(similarities) > 0:
             return -1
 
@@ -62,24 +55,46 @@ class Measures:
             if document_id in relevant_document_ids:
                 relevant_documents += 1
 
-        return relevant_documents / len(similarities)
+        return relevant_documents
 
 
-    # Precision = No. of relevant documents retrieved / No. of total documents retrieved
-    def precision2(self, all_documents, relevant_documents):
-        if len(all_documents) > 0:
-            return len(relevant_documents) / len(all_documents)
+    def recall(self, row_num, similarities):
+        if not len(similarities) > 0:
+            return -1
+
+        intersection = self.relevant_intersect_retrieved(row_num, similarities)
+        amount_relevant_docs = self.helper.get_relevent_docs(row_num)
+        return  intersection / amount_relevant_docs
+
+    # Recall = No. of relevant documents retrieved / No. of total relevant documents
+    def recall2(self, total_relevant_documents, relevant_documents):
+        if len(total_relevant_documents) > 0:
+            return len(relevant_documents) / len(total_relevant_documents)
         else:
             return 0
 
 
+    # Precision = No. of relevant documents retrieved / No. of total documents retrieved
+    def precision(self, row_num, similarities):
+        if not len(similarities) > 0:
+            return -1
+
+        intersection = self.relevant_intersect_retrieved(row_num, similarities)
+        return intersection / len(similarities)
+
+
+    def f1score(self, row_num, similarities):
+        precision = self.precision(row_num, similarities)
+        recall    = self.recall(row_num, similarities)
+        return 2 * precision * recall / (precision + recall)
 
     # F - Score = 2 * Precision * Recall / (Precision + Recall)
-    def f1score(self, recall_score, precision_score):
+    def f1score2(self, recall_score, precision_score):
         if(precision_score+recall_score)>0:
             return 2*precision_score*recall_score / (precision_score+recall_score)
         else:
             return 0
+
 
     def query_sim(self, query):
         similarities = []
