@@ -254,9 +254,9 @@ for row_num in range(1, 5):
     similarities.sort(key=operator.itemgetter(1), reverse=True)
     n = len(similarities)
 
-    filePrecision = open("./graphs/Precision" + str(row_num) + ".csv", "w")
-    fileRecall    = open("./graphs/Recall" + str(row_num) + ".csv", "w")
-    fileF1Score   = open("./graphs/F1Score" + str(row_num) + ".csv", "w")
+    filePrecision = open("./report/graphs/Precision" + str(row_num) + ".csv", "w")
+    fileRecall    = open("./report/graphs/Recall" + str(row_num) + ".csv", "w")
+    fileF1Score   = open("./report/graphs/F1Score" + str(row_num) + ".csv", "w")
 
     for k in range(0, 1401, k_range):
         if k == 0:
@@ -273,8 +273,8 @@ for row_num in range(1, 5):
         #print("F1 Score ", k, ":", f1score, "\n")
 
         filePrecision.write(str(k) + ", " + str(precision) + "\n")
-        fileRecall.write(str(k) + ", " + str(precision) + "\n")
-        fileF1Score.write(str(k) + ", " + str(precision) + "\n")
+        fileRecall.write(str(k) + ", " + str(recall) + "\n")
+        fileF1Score.write(str(k) + ", " + str(f1score) + "\n")
 
     filePrecision.close()
     fileRecall.close()
