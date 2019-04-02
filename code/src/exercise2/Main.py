@@ -245,7 +245,7 @@ print("\n-----------------------------------@k----------------------------------
 
 #--------------------------@k------------------------------#
 
-k_range = 10
+k_range = 1
 
 for row_num in range(1, 5):
     query = query_list[row_num-1]
@@ -268,9 +268,9 @@ for row_num in range(1, 5):
         recall    = measures.recall(row_num, similarities_cut)
         f1score   = measures.f1score_precalculated(precision, recall)
 
-        print("Precision", k, ":", precision)
-        print("Recall   ", k, ":", recall)
-        print("F1 Score ", k, ":", f1score, "\n")
+        #print("Precision", k, ":", precision)
+        #print("Recall   ", k, ":", recall)
+        #print("F1 Score ", k, ":", f1score, "\n")
 
         filePrecision.write(str(k) + ", " + str(precision) + "\n")
         fileRecall.write(str(k) + ", " + str(precision) + "\n")
