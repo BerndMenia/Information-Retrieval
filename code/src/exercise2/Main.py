@@ -135,6 +135,7 @@ print("------------------------------------------------------------------------\
 
 
 #---------------------Query ngrams for measurement----------------#
+
 ngram1_times = []
 ngram2_times = []
 ngram3_times = []
@@ -165,6 +166,7 @@ print("Monogram average query time:", sum(ngram1_times) / n)
 print("Bigram   average query time:", sum(ngram2_times) / n)
 print("Trigram  average query time:", sum(ngram3_times) / n, "\n")
 
+#----------------------------------------------------------------------#
 
 # here we get the first query out of queries.csv
 query_list = helper.get_sample_queries()
@@ -215,8 +217,9 @@ print()
 
 #-----------------------Measurements-----------------------#
 
+'''
 row_num1 = 4
-query1 = query_list[row_num1]
+query1 = query_list[row_num1-1]
 
 print("Amount documents:", len(measures.documents))
 sim_query1 = measures.query_sim(query1)
@@ -236,6 +239,46 @@ print("F1 Score  for query", row_num1, ":", measures.f1score(row_num1, sim_query
 for i in range(20):
     print(sim_query1[i])
 
+'''
+
+print("\n-----------------------------------@k-----------------------------------------\n")
+
+#--------------------------@k------------------------------#
+
+k_range = 10
+
+for row_num in range(1, 5):
+    query = query_list[row_num-1]
+    print(query)
+    similarities = measures.query_sim(query)
+    similarities.sort(key=operator.itemgetter(1), reverse=True)
+    n = len(similarities)
+
+    filePrecision = open("./graphs/Precision" + str(row_num) + ".csv", "w")
+    fileRecall    = open("./graphs/Recall" + str(row_num) + ".csv", "w")
+    fileF1Score   = open("./graphs/F1Score" + str(row_num) + ".csv", "w")
+
+    for k in range(0, 1401, k_range):
+        if k == 0:
+            k = 1
+
+        similarities_cut = [similarities[i] for i in range(k) if i < n]
+        print(similarities_cut)
+        precision = measures.precision(row_num, similarities_cut)
+        recall    = measures.recall(row_num, similarities_cut)
+        f1score   = measures.f1score_precalculated(precision, recall)
+
+        print("Precision", k, ":", precision)
+        print("Recall   ", k, ":", recall)
+        print("F1 Score ", k, ":", f1score, "\n")
+
+        filePrecision.write(str(k) + ", " + str(precision) + "\n")
+        fileRecall.write(str(k) + ", " + str(precision) + "\n")
+        fileF1Score.write(str(k) + ", " + str(precision) + "\n")
+
+    filePrecision.close()
+    fileRecall.close()
+    fileF1Score.close()
 
 
 #helper.get_term_doc_matrix(helper.get_term_doc_vector(), sample_query)

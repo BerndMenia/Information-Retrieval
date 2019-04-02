@@ -44,10 +44,10 @@ class Measures:
             return -1
 
         relevant_document_ids = self.helper.get_relevant_docs_ids(row_num)
-        print("Relevant document ids:", relevant_document_ids)
+        #print("Relevant document ids:", relevant_document_ids)
 
         similarities_cutoff = self.sim_cutoff(similarities)
-        print("Cutoff:", similarities_cutoff)
+        #print("Cutoff:", similarities_cutoff)
 
         relevant_documents = 0
 
@@ -81,6 +81,13 @@ class Measures:
     def f1score(self, row_num, similarities):
         precision = self.precision(row_num, similarities)
         recall    = self.recall(row_num, similarities)
+        return 2 * precision * recall / (precision + recall)
+
+
+    def f1score_precalculated(self, precision, recall):
+        if precision + recall == 0:
+            return -1
+
         return 2 * precision * recall / (precision + recall)
 
 
