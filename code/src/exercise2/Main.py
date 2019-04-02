@@ -335,3 +335,19 @@ for row_num in range(1, 5):
 helper.get_term_doc_matrix(helper.get_term_doc_vector(), sample_query)
 
 
+# NOTE: below is for testing cosine similarity results
+#result = vsm.calc_cosine_similarity(helper.get_term_doc_matrix(helper.get_term_doc_vector(), sample_query))
+#for i in result:
+#    print(i)
+
+cosine_similarity_result_list = vsm.calc_cosine_similarity(helper.get_term_doc_matrix(helper.get_term_doc_vector(), query_list[0]))
+c_sim_result1 = cosine_similarity_result_list[184]
+c_sim_result2 = cosine_similarity_result_list[29]
+c_sim_result3 = cosine_similarity_result_list[31]
+c_sim_result4 = cosine_similarity_result_list[12]
+c_sim_result5 = cosine_similarity_result_list[51]
+print("Cosine Similarity1: ", c_sim_result1)
+print("Cosine Similarity2: ", c_sim_result2)
+print("Cosine Similarity3: ", c_sim_result3)
+print("Cosine Similarity4: ", c_sim_result4)
+print("Cosine Similarity5: ", c_sim_result5)

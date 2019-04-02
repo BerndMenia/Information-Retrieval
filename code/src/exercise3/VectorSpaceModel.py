@@ -1,19 +1,17 @@
 from code.src.exercise2.Helper import Helper
-from code.src.exercise2.InvertedIndex import InvertedIndex
 import math
 from sklearn.metrics.pairwise import cosine_similarity
-from itertools import groupby
 import numpy as np
+
 
 # NOTE: look here https://www.datasciencecentral.com/profiles/blogs/information-retrieval-document-search-using-vector-space-model-in for more information on VSM
 class VectorSpaceModel:
 
     def __init__(self):
         self.helper = Helper()
-        #self.indexer = InvertedIndex()
 
     # given the documents body, this function calculates the term frequency - inverse document frequency (tf-idf)
-    def calc_tf_idf(self, query, indexer):
+    def calc_tf_idf(self, query):
         total_num_docs = 1400
         all_docs_dict = self.helper.get_term_doc_vector()
 
@@ -45,18 +43,18 @@ class VectorSpaceModel:
 
 
     # TODO: calculate cosine similarit
-    # given the tf-idf vector representation for a document and the query
+    # given the term document matrix
     # this function returns the cosine similarity of these vectors
     # calculate the similarity score between each document vector and the query term vector by applying cosine similarity
     def calc_cosine_similarity(self, tfidf_matrix):
         query_vec = tfidf_matrix[-1]
-        q_v = np.array(query_vec).reshape((-1,1))
-
 
         sim_value_list = []
-        for tfidf_entry in tfidf_matrix[-2]:
-            tf_entry = np.array(tfidf_entry).reshape((-1, 1))
-            sim_value = cosine_similarity(tf_entry, q_v)
-            sim_value_list.append(sim_value)
+        for tfidf_entry in tfidf_matrix[0:len(tfidf_matrix)]:
+            if not (np.linalg.norm(tfidf_entry)*np.linalg.norm(query_vec))==0:
+                sim_value = np.dot(tfidf_entry, query_vec)/(np.linalg.norm(tfidf_entry)*np.linalg.norm(query_vec))
+                sim_value_list.append(sim_value)
+            else:
+                sim_value_list.append(0)
 
         return sim_value_list
