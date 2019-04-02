@@ -45,7 +45,7 @@ class VectorSpaceModel:
                 posting_frequencies = [len(list(group)) for key, group in groupby(postings)]
                 #postings = list(dict.fromkeys(postings))
                 #postings_list.append(postings)
-                print("posting freq of ", w, ": ", posting_frequencies)
+                #print("posting freq of ", w, ": ", posting_frequencies)
 
 
 
