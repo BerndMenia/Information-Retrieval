@@ -42,7 +42,7 @@ class VectorSpaceModel:
         return tfidf_list
 
 
-    # TODO: calculate cosine similarit
+    # TODO: calculate cosine similarity
     # given the term document matrix
     # this function returns the cosine similarity of these vectors
     # calculate the similarity score between each document vector and the query term vector by applying cosine similarity
