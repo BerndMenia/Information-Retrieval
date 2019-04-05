@@ -298,7 +298,7 @@ print("\n-----------------------------------@k----------------------------------
 
 k_range = 1
 
-'''
+
 for row_num in range(1, 5):
     query = query_list[row_num-1]
     print(query)
@@ -330,7 +330,7 @@ for row_num in range(1, 5):
     filePrecision.close()
     fileRecall.close()
     fileF1Score.close()
-'''
+
 
 helper.get_term_doc_matrix(helper.get_term_doc_vector(), sample_query)
 
