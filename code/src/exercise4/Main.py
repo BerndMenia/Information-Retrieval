@@ -4,6 +4,7 @@ from sklearn.metrics import accuracy_score
 from os.path import abspath
 from code.src.exercise4.SVM import SVM
 from code.src.exercise4.KNN import KNN
+from code.src.exercise4.DecisionTree import DecisionTree
 
 
 # import the dataset
@@ -60,13 +61,20 @@ trigram_c_vec_train = trigram_c_vectorizer.fit_transform(X_train)
 # train svm classifier on training data
 svm = SVM()
 clf_svm = svm.clf_fit(tfidf_vec_train, y_train)
-# predict using svm
+# predict response for test dataset using svm
 y_predict_svm = svm.clf_predict(tfidf_vec_test)
-print("SVM accuracy score: ", accuracy_score(y_predict_svm, y_test)*100)
+print("SVM accuracy score: ", accuracy_score(y_predict_svm, y_test)*100, "%")
 
 # train knn classifier on training data
 knn = KNN()
 clf_knn = knn.clf_fit(tfidf_vec_train, y_train)
-# predict using knn
+# predict response for test dataset using knn
 y_predict_knn = knn.clf_predict(tfidf_vec_test)
-print("KNN accuracy score: ", accuracy_score(y_predict_knn, y_test)*100)
+print("KNN accuracy score: ", accuracy_score(y_predict_knn, y_test)*100, "%")
+
+# train decision tree classifier on training data
+dt = DecisionTree()
+clf_dt = dt.clf_fit(tfidf_vec_train, y_train)
+# predict response for test dataset using decision tree
+y_predict_dt = dt.clf_predict(tfidf_vec_test)
+print("Decision Tree accuracy score: ", accuracy_score(y_predict_dt, y_test)*100, "%")
