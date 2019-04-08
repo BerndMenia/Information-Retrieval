@@ -18,25 +18,14 @@ authorship_testdata = load_files(path_testdata)
 X_train, y_train = authorship_traindata.data, authorship_traindata.target
 X_test, y_test = authorship_testdata.data, authorship_testdata.target
 
-
 # extract features with vectorizer
 # tf-idf vectors
 tfidf_vectorizer = TfidfVectorizer() # for removing stopwords, set parameter stop_words='english'
 
-# tokenize and build vocabulary
-tfidf_tok_train = tfidf_vectorizer.fit(X_train)
-#print(tok_train.vocabulary_)
-#print(tok_train.idf_)
-
-# encode document
-tfidf_vec_train = tfidf_tok_train.transform(X_train)
-#print(tfidf_vectorizer.get_feature_names())
-#print(vec_train.shape)
-#print(vec_train.toarray())
-
-# NOTE: stuff above could also be done in one step: vec_train = vectorizer.fit_transform(X_train), but in order to see whats happening i split it up here
-
-tfidf_vec_test = tfidf_vectorizer.fit_transform(X_test)
+tfidf_vec_train = tfidf_vectorizer.fit_transform(X_train)
+tfidf_vec_test = tfidf_vectorizer.transform(X_test) # note: vectorizers should not be fit on test data
+#print("len test: ", tfidf_vec_test.getnnz)
+#print("len train: ", tfidf_vec_train.getnnz)
 
 # word ngrams
 unigram_w_vectorizer = CountVectorizer(ngram_range=(1, 1), analyzer='word')
@@ -67,10 +56,9 @@ trigram_c_vec_train = trigram_c_vectorizer.fit_transform(X_train)
 #print(trigram_c_vectorizer.get_feature_names())
 
 
-# TODO: ERROR need to check why features in testing data is different compared to the training data
 # train svm classifier on training data
 svm = SVM()
 clf_svm = svm.clf_fit(tfidf_vec_train, y_train)
 predictions_svm = svm.clf_predict(tfidf_vec_test)
-print("SVM accuracy score -> ", accuracy_score(predictions_svm, y_test)*100)
+print("SVM accuracy score: ", accuracy_score(predictions_svm, y_test)*100)
 
