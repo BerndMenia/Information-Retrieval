@@ -1,11 +1,8 @@
-import numpy as np
-import re
-import nltk
 from sklearn.datasets import load_files
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-import pickle
-from nltk.corpus import stopwords
+from sklearn.metrics import accuracy_score
 from os.path import abspath
+from code.src.exercise4.SVM import SVM
 
 
 # import the dataset
@@ -39,6 +36,8 @@ tfidf_vec_train = tfidf_tok_train.transform(X_train)
 
 # NOTE: stuff above could also be done in one step: vec_train = vectorizer.fit_transform(X_train), but in order to see whats happening i split it up here
 
+tfidf_vec_test = tfidf_vectorizer.fit_transform(X_test)
+
 # word ngrams
 unigram_w_vectorizer = CountVectorizer(ngram_range=(1, 1), analyzer='word')
 bigram_w_vectorizer = CountVectorizer(ngram_range=(2, 2), analyzer='word')
@@ -62,8 +61,16 @@ unigram_c_vec_train = unigram_c_vectorizer.fit_transform(X_train)
 #print(unigram_c_vectorizer.get_feature_names())
 
 bigram_c_vec_train = bigram_c_vectorizer.fit_transform(X_train)
-print(bigram_c_vectorizer.get_feature_names())
+#print(bigram_c_vectorizer.get_feature_names())
 
 trigram_c_vec_train = trigram_c_vectorizer.fit_transform(X_train)
 #print(trigram_c_vectorizer.get_feature_names())
+
+
+# TODO: ERROR need to check why features in testing data is different compared to the training data
+# train svm classifier on training data
+svm = SVM()
+clf_svm = svm.clf_fit(tfidf_vec_train, y_train)
+predictions_svm = svm.clf_predict(tfidf_vec_test)
+print("SVM accuracy score -> ", accuracy_score(predictions_svm, y_test)*100)
 
