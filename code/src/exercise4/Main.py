@@ -110,7 +110,7 @@ knn_clf_cng = knn_clf.fit(ngram_c_vec_train, y_train)
 # predict response for test dataset using knn
 y_predict_knn_cng = knn_clf_cng.predict(ngram_c_vec_test)
 print("KNN accuracy score [char ngram]: ", accuracy_score(y_predict_knn_cng, y_test)*100, "%")
-plot.plot_confusion_matrix(y_test, y_predict_knn_cng, class_names, clf="SVM [char ngrams]")
+plot.plot_confusion_matrix(y_test, y_predict_knn_cng, class_names, clf="KNN [char ngrams]")
 
 # -------------------------------------------------- Decision Tree ---------------------------------------------------- #
 dt_clf = DecisionTreeClassifier()
