@@ -1,0 +1,54 @@
+knn neighbours = 5
+SVM accuracy score [TF-IDF]:  51.800000000000004 %
+SVM accuracy score [word ngram]:  34.44 %
+SVM accuracy score [char ngram]:  16.84 %
+KNN accuracy score [TF-IDF]:  54.04 %
+KNN accuracy score [word ngram]:  3.56 %
+KNN accuracy score [char ngram]:  39.0 %
+Decision Tree accuracy score [TF-IDF]:  44.36 %
+Decision Tree accuracy score [word ngram]:  43.36 %
+Decision Tree accuracy score [char ngram]:  35.24 %
+
+KNN neighbours = 4
+SVM accuracy score [TF-IDF]:  51.800000000000004 %
+SVM accuracy score [word ngram]:  34.44 %
+SVM accuracy score [char ngram]:  16.84 %
+KNN accuracy score [TF-IDF]:  54.08 %
+KNN accuracy score [word ngram]:  3.56 %
+KNN accuracy score [char ngram]:  37.96 %
+Decision Tree accuracy score [TF-IDF]:  45.64 %
+Decision Tree accuracy score [word ngram]:  43.8 %
+Decision Tree accuracy score [char ngram]:  35.88 %
+
+KNN neighbours = 3
+SVM accuracy score [TF-IDF]:  51.800000000000004 %
+SVM accuracy score [word ngram]:  34.44 %
+SVM accuracy score [char ngram]:  16.84 %
+KNN accuracy score [TF-IDF]:  54.559999999999995 %
+KNN accuracy score [word ngram]:  2.96 %
+KNN accuracy score [char ngram]:  37.16 %
+Decision Tree accuracy score [TF-IDF]:  45.16 %
+Decision Tree accuracy score [word ngram]:  43.76 %
+Decision Tree accuracy score [char ngram]:  35.64 %
+
+KNN neighbours = 2
+SVM accuracy score [TF-IDF]:  51.800000000000004 %
+SVM accuracy score [word ngram]:  34.44 %
+SVM accuracy score [char ngram]:  16.84 %
+KNN accuracy score [TF-IDF]:  54.36 %
+KNN accuracy score [word ngram]:  2.92 %
+KNN accuracy score [char ngram]:  36.96 %
+Decision Tree accuracy score [TF-IDF]:  45.2 %
+Decision Tree accuracy score [word ngram]:  43.480000000000004 %
+Decision Tree accuracy score [char ngram]:  35.04 %
+
+KNN neighbours = 1
+SVM accuracy score [TF-IDF]:  51.800000000000004 %
+SVM accuracy score [word ngram]:  34.44 %
+SVM accuracy score [char ngram]:  16.84 %
+KNN accuracy score [TF-IDF]:  54.72 %
+KNN accuracy score [word ngram]:  4.36 %
+KNN accuracy score [char ngram]:  41.839999999999996 %
+Decision Tree accuracy score [TF-IDF]:  45.72 %
+Decision Tree accuracy score [word ngram]:  43.44 %
+Decision Tree accuracy score [char ngram]:  33.879999999999995 %
