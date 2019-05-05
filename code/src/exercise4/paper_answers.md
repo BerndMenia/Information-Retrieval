@@ -22,7 +22,7 @@ Please answer the following questions:
     
     | Profile-Based | Instance-Based | 
     |:----------------------------------------------------------|:----------------------------------------------------|
-    | All training texts of an author are combined into one big text and then extract cumulative information out of it. The result is called the profile of the author. | All training texts of an author are regarded as separate instances, each represented by a vector. A classification algorithm is then trained on these instances to develop an attribution model. 
+    | "All training texts of an author are combined into one big text and then extract cumulative information out of it. The result is called the profile of the author". | "All training texts of an author are regarded as separate instances, each represented by a vector. A classification algorithm is then trained on these instances to develop an attribution model". 
     
     - Con: Needs special treatment if there are few instances: "Note that such classification algorithms require multiple training instances per class for extracting a reliable model.Therefore, according to instance-based approaches, in case we have only one, but a quite long, training text for a particular  candidate  author  (e.g.,  an  entire  book),  this  should be segmented into multiple parts, probably of equal length."
     
