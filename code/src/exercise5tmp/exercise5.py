@@ -8,34 +8,40 @@ b = Word2Vec(brown.sents())
 mr = Word2Vec(movie_reviews.sents())
 t = Word2Vec(treebank.sents())
 
+money = "money"
+great = "great"
+company = "company"
+
 print("money")
-print("Brown:", b.most_similar('money', topn=5))
-# [('pay', 0.6832243204116821), ('ready', 0.6152011156082153), ('try', 0.5845392942428589), ('care', 0.5826011896133423), ('move', 0.5752171277999878)]
+print("Brown:", b.most_similar(money, topn=5))
+# Brown: [('care', 0.9203847646713257), ('job', 0.9120237827301025), ('trouble', 0.9073654413223267), ('chance', 0.8856830596923828), ('getting', 0.8842267394065857)]
 
-print("MovRev:", mr.most_similar('money', topn=5))
-# [('unstoppable', 0.6900672316551208), ('pain', 0.6289106607437134), ('obtain', 0.62665855884552), ('jail', 0.6140228509902954), ('patients', 0.6089504957199097)]
+print("Brown2:", b.most_similar("Money", topn=5))
 
-print("Treebank:", t.most_similar('money', topn=5), "\n")
-# [('short-term', 0.9459682106971741), ('-LCB-', 0.9449775218963623), ('rights', 0.9442864656448364), ('interested', 0.9430986642837524), ('national', 0.9396077990531921)]
+print("MovRev:", mr.most_similar(money, topn=5))
+# MovRev: [('him', 0.7500324249267578), ('home', 0.7491098046302795), ('chance', 0.7342701554298401), ('trouble', 0.7290754318237305), ('attention', 0.7274935841560364)]
+
+print("Treebank:", t.most_similar(money, topn=5), "\n")
+# Treebank: [('traders', 0.9998961687088013), ('new', 0.9998897314071655), ('even', 0.9998819828033447), ('since', 0.9998773336410522), ('into', 0.9998763799667358)]
 
 
 print("great")
-print("Brown:", b.most_similar('great', topn=5))
-# [('new', 0.6999611854553223), ('experience', 0.6718623042106628), ('social', 0.6702290177345276), ('group', 0.6684836149215698), ('life', 0.6667487025260925)]
+print("Brown:", b.most_similar(great, topn=5))
+# Brown: [('common', 0.8723435401916504), ('experience', 0.856053352355957), ('limited', 0.808241069316864), ('part', 0.8045881390571594), ('sense', 0.8003120422363281)]
 
-print("MovRev:", mr.most_similar('great', topn=5))
-#[('wonderful', 0.7548679113388062), ('good', 0.6538234949111938), ('strong', 0.6523671746253967), ('phenomenal', 0.6296845078468323), ('fine', 0.5932096242904663)]
+print("MovRev:", mr.most_similar(great, topn=5))
+# MovRev: [('wonderful', 0.8285278081893921), ('nice', 0.823311448097229), ('decent', 0.8028441071510315), ('good', 0.7920763492584229), ('strong', 0.7473284006118774)]
 
-print("Treebank:", t.most_similar('great', topn=5), "\n")
-# [('won', 0.9452997446060181), ('set', 0.9445616006851196), ('target', 0.9342271089553833), ('received', 0.9333916306495667), ('long', 0.9224691390991211)]
+print("Treebank:", t.most_similar(great, topn=5), "\n")
+# Treebank: [('market', 0.999237596988678), ('because', 0.999198317527771), ('what', 0.9991917014122009), ('time', 0.9991852641105652), ('The', 0.9991787672042847)]
 
 
 print("company")
-print("Brown:", b.most_similar('company', topn=5))
-# [('industry', 0.6164317727088928), ('technical', 0.6059585809707642), ('orthodontist', 0.5982754826545715), ('foamed', 0.5929019451141357), ('trail', 0.5763031840324402)]
+print("Brown:", b.most_similar(company, topn=5))
+# Brown: [('conviction', 0.9396542310714722), ('decision', 0.9332501888275146), ('heritage', 0.931989312171936), ('profession', 0.9315740466117859), ('party', 0.9282490015029907)]
 
-print("MovRev:", mr.most_similar('company', topn=5))
-# [('colony', 0.6689200401306152), ('temple', 0.6546304225921631), ('arrival', 0.6497283577919006), ('army', 0.6339291334152222), ('planet', 0.6184555292129517)]
+print("MovRev:", mr.most_similar(company, topn=5))
+# MovRev: [('army', 0.9050424695014954), ('band', 0.8675254583358765), ('plans', 0.8508973121643066), ('church', 0.8501453399658203), ('murdered', 0.8488762974739075)]
 
-print("Treebank:", t.most_similar('company', topn=5))
-# [('panel', 0.7949466705322266), ('Herald', 0.7674347162246704), ('Analysts', 0.7463694214820862), ('amendment', 0.7282689809799194), ('Treasury', 0.719698429107666)]
+print("Treebank:", t.most_similar(company, topn=5))
+# Treebank: [('is', 0.9996266961097717), ('they', 0.9995608925819397), ('*T*-3', 0.9995567798614502), ('does', 0.9994494915008545), ('have', 0.9993588924407959)]
