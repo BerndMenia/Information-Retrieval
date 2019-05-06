@@ -11,6 +11,7 @@ t = Word2Vec(treebank.sents())
 money = "money"
 great = "great"
 company = "company"
+france = "France"
 
 print("money")
 print("Brown:", b.most_similar(money, topn=5))
@@ -43,5 +44,16 @@ print("Brown:", b.most_similar(company, topn=5))
 print("MovRev:", mr.most_similar(company, topn=5))
 # MovRev: [('army', 0.9050424695014954), ('band', 0.8675254583358765), ('plans', 0.8508973121643066), ('church', 0.8501453399658203), ('murdered', 0.8488762974739075)]
 
-print("Treebank:", t.most_similar(company, topn=5))
+print("Treebank:", t.most_similar(company, topn=5), "\n")
 # Treebank: [('is', 0.9996266961097717), ('they', 0.9995608925819397), ('*T*-3', 0.9995567798614502), ('does', 0.9994494915008545), ('have', 0.9993588924407959)]
+
+
+print("France")
+print("Brown:", b.most_similar(france, topn=5))
+#
+
+print("MovRev:", mr.most_similar(france, topn=5))
+#
+
+print("Treebank:", t.most_similar(france, topn=5))
+#
