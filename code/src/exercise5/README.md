@@ -16,4 +16,4 @@
 - Total 10 / 10 points
 
 ### Note
-We watched the lecture as well as worked on the first exercise separately, therefore we have two versions of it. We uploaded them both though because our answers differ slightly from each other. 
+We worked on the first exercise separately, therefore we have two versions of it. We uploaded them both though because our answers differ slightly from each other. 
