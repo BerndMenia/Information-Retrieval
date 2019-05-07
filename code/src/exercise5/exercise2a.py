@@ -1,8 +1,6 @@
 from gensim.models import Word2Vec
 from nltk.corpus import brown, movie_reviews, treebank
 
-# https://streamhacker.com/2014/12/29/word2vec-nltk/
-
 
 b = Word2Vec(brown.sents())
 mr = Word2Vec(movie_reviews.sents())
