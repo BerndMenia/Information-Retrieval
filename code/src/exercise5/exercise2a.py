@@ -48,12 +48,7 @@ print("Treebank:", t.most_similar(company, topn=5), "\n")
 # Treebank: [('is', 0.9996266961097717), ('they', 0.9995608925819397), ('*T*-3', 0.9995567798614502), ('does', 0.9994494915008545), ('have', 0.9993588924407959)]
 
 
+print("ATTENTION: Case matters!\n")
 print("France")
 print("Brown:", b.most_similar(france, topn=5))
-#
-
-print("MovRev:", mr.most_similar(france, topn=5))
-#
-
-print("Treebank:", t.most_similar(france, topn=5))
 #
