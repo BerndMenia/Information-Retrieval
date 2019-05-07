@@ -1,0 +1,13 @@
+Ex 2c.: How does doc2vec differ from word2vec in terms of the representation computed and the actual computation?
+Distributed representation of words (word2vec):
+continous bag of words (cbow) or skip-gram (sg)
+note: sg predicts the surrounding words given the center word - sg makes use of ngrams; cbow predicts the center word given a set of surrounding words
+
+Distributed representation of documents (doc2vec): 
+distributed bag of words of paragraph vector (pv-dbow) or distributed memory model of paragraph vectors (pv-dm)
+We use pv-dm, since it was proposed to be more performant in the original paper. pv-dm acts as a memory that remembers what is missing from the current context - or as the topic of the paragraph. Basically, the pv-dm model extends the cbow model of word2vec: pv-dm uses the word2vec cbow model and adds another vector holding the parapgraph id (this is doc unique). In other words, we have several word vectors and one document vector (The word vectors represent the concept of a word, the document vector intends to represent the concept of a document). When training the word vector, the document vector is trained as well and in the end of training it holds a numeric representation of the document. 
+Note that there is also a doc2vec algorithm which is similar to skip-gram, namely pv-dbow.
+
+Ex 2d.: How does the choice of the amount of clusters influence the result of the resulting clustering?
+
+Time compexity and the quality of the final clustering result highly depend on the random selection of the initial centroits (i. e. the amount of clusters).

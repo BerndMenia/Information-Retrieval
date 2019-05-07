@@ -1,7 +1,7 @@
 from gensim.models.doc2vec import Doc2Vec
 from code.src.exercise5.kmeans import kmeans
 
-########## load doc2ved model ##########
+########## load doc2vec model ##########
 model = Doc2Vec.load("vectors/doc2vec.bin")
 
 ########## kmeans ##########
