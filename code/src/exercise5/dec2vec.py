@@ -64,10 +64,12 @@ print("finished building doc2vec vector")
 
 ########## save vector ##########
 
-doc2vec_model.save("vectors/doc2vec.model")
+doc2vec_model.save("vectors/doc2vec.bin")
 
 
 ########## test the model ##########
-# NOTE: to test the model enter any word which is within our trained vocabulary
-print(doc2vec_model.most_similar('Czech'))
-
+# NOTE: to test the model enter any sentence or the whole document content and get the most sim document (to get more than only 1 increase the topn parameter
+search_string = word_tokenize("Australian resources and steel group The Broken Hill Pty Co (BHP) disappointed the share market on Friday with a weaker than expected second-quarter profit to post first-half net earnings of A$683 million before abnormals. BHP, whose shares have been hammered since its key markets in steel and copper turned sour six months ago, booked an abnormal gain of A$107 million to boost the bottom line for the six months to November 30, but investors were not impressed.")
+infer_vector = doc2vec_model.infer_vector(search_string)
+similar_documents = doc2vec_model.docvecs.most_similar([infer_vector], topn=1)
+print(similar_documents)
