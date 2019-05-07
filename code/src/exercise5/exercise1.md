@@ -15,7 +15,7 @@ The basic intuition is to build a data structure that represents the meaning of 
 - the idea that a person wants to express by using words, signs, etc. 
 - the idea that is expressed in a work of writing, art, etc. 
 
-Furthermore it is desired that things like synonyms and context of the word also get stored. For example if we google for "Dell notebook battery size" we would also want to get results for "Dell laptop battery capacity". Even though the word "size" and "capacity" are not the same, they hold the same meaning in this context. The keyword context ist important here. Depending on the sentence and paragraph a word is used two words can be related to each other or not. Looking at "size" and "capacity" again in a different context, "" and "", they are not related to each other. Therefore the meaning of a word is also represented by its neighbor words (distributional similarity). 
+Furthermore it is desired that things like synonyms and context of the word also get stored. For example if we google for "Dell notebook battery size" we would also want to get results for "Dell laptop battery capacity". Even though the word "size" and "capacity" are not the same, they hold the same meaning in this context. The keyword context ist important here. Depending on the sentence and paragraph a word is used two words can be related to each other or not. Looking at "size" and "capacity" again in a different context, e.g. "The size of the blue house", they are not related to each other as "capacity" is no synonym for "size" in this case. Therefore the meaning of a word is also represented by its neighbor words (distributional similarity). 
 
 
 #### b) 
@@ -27,4 +27,4 @@ The obvious drawback with this format is that each vector holds a reference to a
 
 Another problem is that the amount of words increases continuously and dictionaries and such dictionaries have to be tediously expanded by hand. 
 
-The second approach would be to utilize neighboring words as well (distributional representation). This way the context of a word gets considered as well 
+The second approach would be to utilize neighboring words as well (distributional representation). This way the context of a word gets considered as well. 
