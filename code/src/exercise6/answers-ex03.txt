@@ -1,0 +1,24 @@
+note: aim to model a user based on the characteristics of one or multiple of track clusters.
+
+a) What are the main findings of this paper?
+
+The representation of a user by his/her component weights regarding the Gaussian Mixture Model (GMM) and adding the average and standard deviation across all 8 acoustic features of the Spotify API for each user's track, performs best regarding music recommendation accuracy (precision, recall, f1)
+In other words, the best results are achieved with a model which is based on a user’s specific preference regarding different types of music (these types were modeled probabilistically by GMMs) and the specific preference is then complemented with a user’s general musical preference.
+
+
+b) What are Gaussian Mixture Models and how do these manage to capture user preferences in the presented scenario?
+
+Gaussian mixture models are probabilistic models for representing normally distributed subpopulations within an overall population (i.e., user's preferences over all tracks). The subpopulations do not need to be known, they can be predicted.
+Tracks are represented by the track's probability densities regarding the GMM components/clusters.
+User's preferences are computed by the average probabilities for each GMM component/cluster across all of the user's tracks.
+
+
+c) How was the evaluation performed?
+
+The tracks were assigned with ratings to define wheter the user listended to the track (relevant track for user) or not (non-relevant track to the user).
+A XGBoost model was trained to perform binary classification on the relevance of an user's tracks.
+The evaluation was done for each user separately using a leave-k-out evalueation.
+Recall, precision and F1-score were then computed for the predicted ratings for each described user model. The results were compared.
+
+note: XGBoost is an open-source software library which provides a gradient boosting (identify shortcomings by using gradients in the loss funtion)
+
