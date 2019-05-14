@@ -20,8 +20,8 @@
 \maketitle
 
 \section{Exercise 2b}
-\textit{Look into how the DBSCAN and k-Means algorithms actually work.}\\
-\\
+\textit{Look into how the DBSCAN and k-Means algorithms actually work.}
+
 \subsection{k-Means}
 One major difference between k-Means and other clustering algorithms like DBSCAN is that you have to specify the amount of clusters before running k-Means. Then the algorithm works like this:  
 
@@ -41,7 +41,7 @@ One major difference between k-Means and other clustering algorithms like DBSCAN
 	\item Select the clustering which has the lowest variation. 
 \end{enumerate}	
 
-Note that with increasing k and theoretically infinite n the variation would decrease towards 0. Since this is obviously not wanted we have to choose a k which is most fitting for clustering our data. We can run k-Means with different k and plot each run with its minimal variation. Most likely this will result in a plot that mimics a logarithmic plot. By looking at this plot we can find out which k has the sharpest curve and select it as the most fitting value. 
+\noindent Note that with increasing k and theoretically infinite n the variation would decrease towards 0. Since this is obviously not wanted we have to choose a k which is most fitting for clustering our data. We can run k-Means with different k and plot each run with its minimal variation. Most likely this will result in a plot that mimics a logarithmic plot. By looking at this plot we can find out which k has the sharpest curve and select it as the most fitting value. 
 
 \subsection{\textbf{D}ensity \textbf{B}ased \textbf{S}patial \textbf{C}lustering of \textbf{A}pplications with \textbf{N}oise (DBSCAN)}
 Before applying the algorithm we first have to specify the 2 parameters that are needed besides the data set itself: 
@@ -63,10 +63,7 @@ Next we look at the algorithm and how it makes use of the given parameters:
 	\item Repeat steps 1 to 3 until all core points have been assigned to a cluster. 
 \end{enumerate}
 
-The advantage of DBSCAN over k-Means is that it can cluster complex data structures like spirals. 
-
-
-%is similar to k-Means in the sense of that it also clusters points by checking the distances to the near	
+\noindent The advantage of DBSCAN over k-Means is that it can cluster complex data structures like spirals and it is one of the most widely used clustering algorithms to date. 
 
 
 \section{Exercise 2d}
