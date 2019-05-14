@@ -12,7 +12,7 @@
   - [x] c) (1.5 / 1.5 point)
   - [x] d) (1.5 / 1.5 points)
   
-- Exercise 3 (6 / 3 points):
+- Exercise 3 (3 / 3 points):
   - [x] a) (1 / 1 point)
   - [x] b) (1 / 1 point)
   - [x] c) (1 / 1 point)
