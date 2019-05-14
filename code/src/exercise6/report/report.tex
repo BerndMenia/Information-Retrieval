@@ -43,9 +43,30 @@ One major difference between k-Means and other clustering algorithms like DBSCAN
 
 Note that with increasing k and theoretically infinite n the variation would decrease towards 0. Since this is obviously not wanted we have to choose a k which is most fitting for clustering our data. We can run k-Means with different k and plot each run with its minimal variation. Most likely this will result in a plot that mimics a logarithmic plot. By looking at this plot we can find out which k has the sharpest curve and select it as the most fitting value. 
 
+\subsection{\textbf{D}ensity \textbf{B}ased \textbf{S}patial \textbf{C}lustering of \textbf{A}pplications with \textbf{N}oise (DBSCAN)}
+Before applying the algorithm we first have to specify the 2 parameters that are needed besides the data set itself: 
 
-\subsection{DBSCAN}
-Placeholder
+\begin{itemize}
+	\item The neighborhood N (epsilon in the slides) specifies how far a point Q is maximally allowed to be distant from a point P such that P and Q are considered to be in the same cluster. 
+	
+	\item The minimum number of points M that is used to classify points. A \textbf{Core Point} is a point that has at least M points in its neighborhood N. A \textbf{Border Point} is a point that is not a core point, but has at least one Core Point in its neighborhood. Finally a \textbf{Noise Point} is a point that is neither a Core Point, nor a Border Point, i.e. it has no core points in its neighborhood. 
+\end{itemize}
+
+Next we look at the algorithm and how it makes use of the given parameters: 
+\begin{enumerate}
+	\item Randomly select a core point P in the data set and make it a Cluster C. 
+	
+	\item From P add all points within its neighborhood N to the cluster. 
+	
+	\item Select another point in the cluster and repeat step 2 until no more points can be found. 
+	
+	\item Repeat steps 1 to 3 until all core points have been assigned to a cluster. 
+\end{enumerate}
+
+The advantage of DBSCAN over k-Means is that it can cluster complex data structures like spirals. 
+
+
+%is similar to k-Means in the sense of that it also clusters points by checking the distances to the near	
 
 
 \section{Exercise 2d}
