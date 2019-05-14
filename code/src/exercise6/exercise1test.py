@@ -37,6 +37,8 @@ instrumentalness = []
 
 with open('./playlist_features.csv') as csvDataFile:
     csvReader = csv.reader(csvDataFile)
+
+    # https://stackoverflow.com/questions/14257373/skip-the-headers-when-editing-a-csv-file-using-python
     next(csvReader, None)  # skip the headers
 
     for row in csvReader:
@@ -68,21 +70,20 @@ plt.scatter(centroids[:, 0], centroids[:, 1], c='red', s=50)
 plt.show()
 
 
-#X = np.array(list(zip(tempo, energy, speechiness, acousticness, danceability, valence, instrumentalness)))
+print("\n\n-------------------------PCA----------------------")
 
+X = np.array(list(zip(tempo, energy, speechiness, acousticness, danceability, valence, instrumentalness)))
+X = X.astype(np.float64)
 
+pca = PCA(n_components=2).fit(X)
+datapoint = pca.transform(X)
 
+kmeans = KMeans(n_clusters=10).fit(df)
+centroids2 = kmeans.cluster_centers_
+print(centroids)
 
-
-#pca = PCA(n_components=2).fit(df)
-#datapoint = pca.transform(df)
-
-#kmeans = KMeans(n_clusters=10).fit(df)
-#centroids = kmeans.cluster_centers_
-#print(centroids)
-
-#plt.scatter(datapoint[:, 0], datapoint[:, 1], c='red')
-# centroids = kmeans_model.cluster_centers_
-#centroidpoint = pca.transform(centroids)
-#plt.scatter(centroidpoint[:,0], centroidpoint[:,1], marker='^', s=150, c='#000000')
-#plt.show()
+plt.scatter(datapoint[:, 0], datapoint[:, 1], c=kmeans.labels_.astype(float), s=50, alpha=0.5)
+#centroids2 = kmeans.cluster_centers_
+centroidpoint = pca.transform(centroids)
+plt.scatter(centroidpoint[:,0], centroidpoint[:,1], c='red', s=50)
+plt.show()
