@@ -37,4 +37,4 @@ Yehuda Koren, Robert Bell, and Chris Volinsky. Matrix factorization techniques f
   - Alternating Least Squares (ALS): As we know it is likely that there is incomplete information in our calculations. "However, if we fix one of the unknowns, the op-timization problem becomes quadratic and can be solved optimally." 
   The major disadvantage of ALS over SGD is that it is slower and more complex. However ALS can be parallelized and can therefore have better computation time than SGD when properly used. Another advantage of ALS over GD (not SGD) is if the sample data is implicit. In that case looping over all sample points is expensive for GD, but not so much for ALS. Allthough this second advantage can be neglected when regarding SGD instead of GD. 
 
-- b 
+- b: SVD needs complete information in order to calculate results. Matrix factorization itself can work with incomplete data. Especially when starting a recommender system Matrix factorization seems to be better of because there's not much data (complete) data to work with.. 
