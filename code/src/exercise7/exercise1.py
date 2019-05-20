@@ -7,13 +7,21 @@ from surprise import Dataset
 
 '''
 Parameters for the KNN based algorithms: 
+
 uid     -> The user id on which the prediction shall be made. Make sure that uid exists in the database, otherwise the 
            algorithm will not be able to predict (it will not fail however, just output a message). 
+           
 iid     -> The item id (movie) that gets used in combination with the uid to clearly identify the uid iid pair. 
            Just like for uid make sure that iid exists in the database or the algorithm will not produce meaningful output. 
+
 r_ui    -> The actual rating that user uid gave for movie iid. Can be used to compare the predicted result. 
            Default is None
-clip    -> True / False: 
+
+clip    -> True / False: From the documentation: Whether to clip the estimation into the rating scale.
+           For example, if :math:`\\hat{r}_{ui}` is :math:`5.5` while the rating scale is :math:`[1, 5]`, 
+           then :math:`\\hat{r}_{ui}` is set to :math:`5`. Same goes if :math:`\\hat{r}_{ui} < 1`.
+           Default is ``True``.
+
 verbose -> True / False: Iff set to True then the resulting prediction with uid, iid, r_uid and est gets printed. 
            Default is False. 
 '''
@@ -46,27 +54,34 @@ iid2 = str(514)
 iid3 = str(977)
 iid4 = str(370)
 
+r_ui1 = 4
+r_ui2 = 4
+r_ui3 = 1
+r_ui4 = 3
+
+verboseFlag = True
+
 # get a prediction for specific users and items.
 print("KNNBaseLine:")
-predBaseLine = algoBaseLine.predict(uid1, iid1, r_ui=4, verbose=True)
-predBaseLine = algoBaseLine.predict(uid2, iid2, r_ui=4, verbose=True)
-predBaseLine = algoBaseLine.predict(uid3, iid3, r_ui=1, verbose=True)
-predBaseLine = algoBaseLine.predict(uid4, iid4, r_ui=3, verbose=True)
+predBaseLine = algoBaseLine.predict(uid1, iid1, r_ui = r_ui1, verbose = verboseFlag)
+predBaseLine = algoBaseLine.predict(uid2, iid2, r_ui = r_ui2, verbose = verboseFlag)
+predBaseLine = algoBaseLine.predict(uid3, iid3, r_ui = r_ui3, verbose = verboseFlag)
+predBaseLine = algoBaseLine.predict(uid4, iid4, r_ui = r_ui4, verbose = verboseFlag)
 
 print("\nKNNBasic:")
-predBasic = algoBasic.predict(uid1, iid1, r_ui=4, verbose=True)
-predBasic = algoBasic.predict(uid2, iid2, r_ui=4, verbose=True)
-predBasic = algoBasic.predict(uid3, iid3, r_ui=1, verbose=True)
-predBasic = algoBasic.predict(uid4, iid4, r_ui=3, verbose=True)
+predBasic = algoBasic.predict(uid1, iid1, r_ui = r_ui1, verbose = verboseFlag)
+predBasic = algoBasic.predict(uid2, iid2, r_ui = r_ui2, verbose = verboseFlag)
+predBasic = algoBasic.predict(uid3, iid3, r_ui = r_ui3, verbose = verboseFlag)
+predBasic = algoBasic.predict(uid4, iid4, r_ui = r_ui4, verbose = verboseFlag)
 
 print("\nKNNWithMeans:")
-predWithMeans = algoWithMeans.predict(uid1, iid1, r_ui=4, verbose=True)
-predWithMeans = algoWithMeans.predict(uid2, iid2, r_ui=4, verbose=True)
-predWithMeans = algoWithMeans.predict(uid3, iid3, r_ui=1, verbose=True)
-predWithMeans = algoWithMeans.predict(uid4, iid4, r_ui=3, verbose=True)
+predWithMeans = algoWithMeans.predict(uid1, iid1, r_ui = r_ui1, verbose = verboseFlag)
+predWithMeans = algoWithMeans.predict(uid2, iid2, r_ui = r_ui2, verbose = verboseFlag)
+predWithMeans = algoWithMeans.predict(uid3, iid3, r_ui = r_ui3, verbose = verboseFlag)
+predWithMeans = algoWithMeans.predict(uid4, iid4, r_ui = r_ui4, verbose = verboseFlag)
 
 print("\nKNNWithZScore:")
-predWithZScore = algoWithZScore.predict(uid1, iid1, r_ui=4, verbose=True)
-predWithZScore = algoWithZScore.predict(uid2, iid2, r_ui=4, verbose=True)
-predWithZScore = algoWithZScore.predict(uid3, iid3, r_ui=1, verbose=True)
-predWithZScore = algoWithZScore.predict(uid4, iid4, r_ui=3, verbose=True)
+predWithZScore = algoWithZScore.predict(uid1, iid1, r_ui = r_ui1, verbose = verboseFlag)
+predWithZScore = algoWithZScore.predict(uid2, iid2, r_ui = r_ui2, verbose = verboseFlag)
+predWithZScore = algoWithZScore.predict(uid3, iid3, r_ui = r_ui3, verbose = verboseFlag)
+predWithZScore = algoWithZScore.predict(uid4, iid4, r_ui = r_ui4, verbose = verboseFlag)
