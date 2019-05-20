@@ -4,18 +4,18 @@
 
 ### Point distribution
 - Exercise 1 (0 / 6 points):
-  - [ ] a) (0 / 0 points)
-  - [ ] b) (2 / 2 points)
-  - [ ] c) (1.5 / 2 points)
+  - [x] a) (0 / 0 points)
+  - [x] b) (2 / 2 points)
+  - [x] c) (2 / 2 points)
   - [ ] d) (0 / 1 point)
   - [ ] e) (0 / 1 point)
   
 - Exercise 2 (0 / 3 points):
-  - [ ] a)    (3 / 3 points):
-    - [ ] i   (1 / 1 point)
-    - [ ] ii  (1 / 1 point)
-    - [ ] iii (1 / 1 point)
+  - [x] a)    (3 / 3 points):
+    - [x] i   (1 / 1 point)
+    - [x] ii  (1 / 1 point)
+    - [x] iii (1 / 1 point)
     
-  - [ ] b) (1 / 1 point)
+  - [x] b) (1 / 1 point)
  
-- Total 7.5 / 10 points
+- Total 8 / 10 points
