@@ -48,28 +48,16 @@ def precision_recall_at_k(predictions, k=10, threshold=3.5):
 
         # Precision@K: Proportion of recommended items that are relevant
         precisions[uid] = n_rel_and_rec_k / n_rec_k if n_rec_k != 0 else 1
+        precision = precisions[uid]
 
         # Recall@K: Proportion of relevant items that are recommended
         recalls[uid] = n_rel_and_rec_k / n_rel if n_rel != 0 else 1
+        recall = recalls[uid]
 
-        f1scores[uid] = 2 * precisions[uid] * recalls[uid] / (precisions[uid] + recalls[uid])
+        # F - Score = 2 * Precision * Recall / (Precision + Recall)
+        f1scores[uid] = 2 * precision * recall / (precision + recall)
 
     return precisions, recalls, f1scores
-
-
-# F - Score = 2 * Precision * Recall / (Precision + Recall)
-def f1Score(precision, recall):
-    return 2 * precision * recall / (precision + recall)
-
-def f1ScoreList(precisions, recalls):
-    f1scores = []
-
-    for i in range(0, len(precisions)):
-        f1scores.append(f1Score(precisions[i], recalls[i]))
-
-    return f1scores
-
-
 
 
 # Load the movielens-100k dataset (download it if needed).
@@ -96,7 +84,7 @@ for trainset, testset in kf.split(data):
     print("Fold", fold_count)
     fold_count += 1
 
-    print("Precision:", sum(prec for prec in precisions.values()) / len(precisions))
-    print("Recall:", sum(rec for rec in recalls.values()) / len(recalls))
-    print("F1Score:", sum(f1score for f1score in f1ScoreList(precisions, recalls)) / len(precisions))
+    print("Precision:", sum(prec    for prec    in precisions.values()) / len(precisions))
+    print("Recall:",    sum(rec     for rec     in recalls.values()   ) / len(recalls)   )
+    print("F1Score:",   sum(f1score for f1score in f1scores.values()  ) / len(precisions))
     print()
