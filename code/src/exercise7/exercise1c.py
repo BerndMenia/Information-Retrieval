@@ -29,6 +29,8 @@ def precision_recall_at_k(predictions, k=10, threshold=3.5):
 
     precisions = dict()
     recalls = dict()
+    f1scores = dict()
+
     for uid, user_ratings in user_est_true.items():
 
         # Sort user ratings by estimated value
@@ -50,7 +52,24 @@ def precision_recall_at_k(predictions, k=10, threshold=3.5):
         # Recall@K: Proportion of relevant items that are recommended
         recalls[uid] = n_rel_and_rec_k / n_rel if n_rel != 0 else 1
 
-    return precisions, recalls
+        f1scores[uid] = 2 * precisions[uid] * recalls[uid] / (precisions[uid] + recalls[uid])
+
+    return precisions, recalls, f1scores
+
+
+# F - Score = 2 * Precision * Recall / (Precision + Recall)
+def f1Score(precision, recall):
+    return 2 * precision * recall / (precision + recall)
+
+def f1ScoreList(precisions, recalls):
+    f1scores = []
+
+    for i in range(0, len(precisions)):
+        f1scores.append(f1Score(precisions[i], recalls[i]))
+
+    return f1scores
+
+
 
 
 # Load the movielens-100k dataset (download it if needed).
@@ -71,7 +90,7 @@ fold_count = 1
 for trainset, testset in kf.split(data):
     algo.fit(trainset)
     predictions = algo.test(testset)
-    precisions, recalls = precision_recall_at_k(predictions, k=5, threshold=4)
+    precisions, recalls, f1scores = precision_recall_at_k(predictions, k=5, threshold=4)
 
     # Precision and recall can then be averaged over all users
     print("Fold", fold_count)
@@ -79,4 +98,5 @@ for trainset, testset in kf.split(data):
 
     print("Precision:", sum(prec for prec in precisions.values()) / len(precisions))
     print("Recall:", sum(rec for rec in recalls.values()) / len(recalls))
+    print("F1Score:", sum(f1score for f1score in f1ScoreList(precisions, recalls)) / len(precisions))
     print()
