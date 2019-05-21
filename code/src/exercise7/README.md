@@ -8,7 +8,7 @@
   - [x] b) (2 / 2 points)
   - [x] c) (2 / 2 points)
   - [ ] d) (0 / 1 point)
-  - [ ] e) (0 / 1 point)
+  - [x] e) (1 / 1 point)
   
 - Exercise 2 (0 / 3 points):
   - [x] a)    (3 / 3 points):
