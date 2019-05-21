@@ -18,4 +18,4 @@
     
   - [x] b) (1 / 1 point)
  
-- Total 9 / 10 points
+- Total 10 / 10 points
