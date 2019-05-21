@@ -19,7 +19,7 @@ from surprise import Dataset
 from surprise.model_selection import cross_validate
 
 
-def precision_recall_at_k(predictions, k=10, threshold=3.5):
+def precision_recall_f1_at_k(predictions, k=10, threshold=3.5):
     '''Return precision and recall at k metrics for each user.'''
 
     # First map the predictions to each user.
@@ -55,7 +55,7 @@ def precision_recall_at_k(predictions, k=10, threshold=3.5):
         recall = recalls[uid]
 
         # F - Score = 2 * Precision * Recall / (Precision + Recall)
-        f1scores[uid] = 2 * precision * recall / (precision + recall)
+        f1scores[uid] = 2 * precision * recall / (precision + recall) if (precision + recall) else 0
 
     return precisions, recalls, f1scores
 
@@ -78,7 +78,7 @@ fold_count = 1
 for trainset, testset in kf.split(data):
     algo.fit(trainset)
     predictions = algo.test(testset)
-    precisions, recalls, f1scores = precision_recall_at_k(predictions, k=5, threshold=4)
+    precisions, recalls, f1scores = precision_recall_f1_at_k(predictions, k=5, threshold=4)
 
     # Precision and recall can then be averaged over all users
     print("Fold", fold_count)
