@@ -10,8 +10,6 @@ from surprise import KNNWithMeans
 from surprise import KNNWithZScore
 
 
-
-
 # read the file with ratings changed to 1 (for 4 and 5 star ratings) and 0 (for 1-3 star ratings)
 data_path = abspath("../../../resources/ml-100k/i.data")
 
@@ -30,7 +28,6 @@ trainset, testset = train_test_split(data, test_size=.25)
 #print(trainset.ur)
 # iids: 50, 1223, 131, 395
 # r: 2, 2, 1, 1
-
 
 # Create instances of the 4 KNN based algorithms
 algoBaseLine = KNNBaseline()
@@ -55,8 +52,8 @@ iid3 = str(131)
 iid4 = str(395)
 
 r_ui1 = 1
-r_ui2 = 0
-r_ui3 = 1
+r_ui2 = 1
+r_ui3 = 0
 r_ui4 = 0
 
 verboseFlag = True
@@ -85,5 +82,3 @@ predWithZScore1 = algoWithZScore.predict(uid1, iid1, r_ui = r_ui1, verbose = ver
 predWithZScore2 = algoWithZScore.predict(uid2, iid2, r_ui = r_ui2, verbose = verboseFlag)
 predWithZScore3 = algoWithZScore.predict(uid3, iid3, r_ui = r_ui3, verbose = verboseFlag)
 predWithZScore4 = algoWithZScore.predict(uid4, iid4, r_ui = r_ui4, verbose = verboseFlag)
-
-

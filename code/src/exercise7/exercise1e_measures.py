@@ -5,10 +5,14 @@ from os.path import abspath
 from surprise import Dataset
 from surprise import Reader
 
+from surprise import KNNBaseline
+from surprise import KNNBasic
+from surprise import KNNWithMeans
+from surprise import KNNWithZScore
+
+
 from collections import defaultdict
 from surprise.model_selection import KFold
-
-from surprise import SVDpp
 from surprise.model_selection import cross_validate
 
 
@@ -62,27 +66,25 @@ reader = Reader(line_format='user item rating timestamp', sep='\t', rating_scale
 # load the dataset
 data = Dataset.load_from_file(data_path, reader=reader)
 
-# Use the SVD++ algorithm since this one is capable of dealing with implicit info.
-algo = SVDpp()
+# calculate RMSE and MAE
+for algo in [KNNBaseline(), KNNBasic(), KNNWithMeans(), KNNWithZScore()]:
+    # Run 5-fold cross-validation and print results.
+    cross_validate(algo, data, measures=['RMSE', 'MAE'], cv=5, verbose=True)
 
-# Run 5-fold cross-validation and print results.
-cross_validate(algo, data, measures=['RMSE', 'MAE'], cv=5, verbose=True)
 
+for algo in [KNNBaseline(), KNNBasic(), KNNWithMeans(), KNNWithZScore()]:
+    # Calculate precision and recall and f1score
+    kf = KFold(n_splits=5)
+    fold_count = 1
+    for trainset, testset in kf.split(data):
+        algo.fit(trainset)
+        predictions = algo.test(testset)
+        precisions, recalls, f1scores = precision_recall_at_k(predictions, k=5, threshold=4)
 
-# Calculate precision and recall
-kf = KFold(n_splits=5)
-fold_count = 1
+        # Precision and recall can then be averaged over all users
+        print("Fold", fold_count)
+        fold_count += 1
 
-for trainset, testset in kf.split(data):
-    algo.fit(trainset)
-    predictions = algo.test(testset)
-    precisions, recalls, f1scores = precision_recall_at_k(predictions, k=5, threshold=4)
-
-    # Precision and recall can then be averaged over all users
-    print("Fold", fold_count)
-    fold_count += 1
-
-    print("Precision:", sum(prec    for prec    in precisions.values()) / len(precisions))
-    print("Recall:",    sum(rec     for rec     in recalls.values()   ) / len(recalls)   )
-    print("F1Score:",   sum(f1score for f1score in f1scores.values()  ) / len(precisions))
-    print()
+        print("Precision:", sum(prec    for prec    in precisions.values()) / len(precisions))
+        print("Recall:",    sum(rec     for rec     in recalls.values()   ) / len(recalls)   )
+        print("F1Score:",   sum(f1score for f1score in f1scores.values()  ) / len(precisions))
