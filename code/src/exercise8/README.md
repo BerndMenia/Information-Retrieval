@@ -10,10 +10,10 @@
   - [ ] d) (0 / 1 point)
   - [ ] e) (0 / 1 point)
   
-- Exercise 2 (0 / 3 points):
-  - [ ] a) (0 / 1 point)
-  - [ ] b) (0 / 1 point)
-  - [ ] c) (0 / 1 point)
+- Exercise 2 (3 / 3 points):
+  - [x] a) (1 / 1 point)
+  - [x] b) (1 / 1 point)
+  - [x] c) (1 / 1 point)
    
  
-- Total 0 / 10 points
+- Total 3 / 10 points
