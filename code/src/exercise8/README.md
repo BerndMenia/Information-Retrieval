@@ -3,12 +3,12 @@
 2. Julia Wanker (01315695) 
 
 ### Point distribution
-- Exercise 1 (0 / 7 points):
-  - [ ] a) (0 / 1 point)
-  - [ ] b) (0 / 3 points)
-  - [ ] c) (0 / 1 point)
-  - [ ] d) (0 / 1 point)
-  - [ ] e) (0 / 1 point)
+- Exercise 1 (7 / 7 points):
+  - [x] a) (1 / 1 point)
+  - [x] b) (3 / 3 points)
+  - [x] c) (1 / 1 point)
+  - [x] d) (1 / 1 point)
+  - [x] e) (1 / 1 point)
   
 - Exercise 2 (3 / 3 points):
   - [x] a) (1 / 1 point)
@@ -16,4 +16,4 @@
   - [x] c) (1 / 1 point)
    
  
-- Total 3 / 10 points
+- Total 10 / 10 points
