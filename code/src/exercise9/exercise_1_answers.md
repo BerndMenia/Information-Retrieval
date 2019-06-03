@@ -9,7 +9,7 @@ Based on your analyses of last week, we now aim to develop a recommender system 
 
 .....................................................................................................
 
-- a) The authors divide the characterization into 4 different categories: 
+- a, b) The authors divide the characterization into 4 different categories: 
   - Inputs: Most often a time stamped and ordered list of user actions. Since we are dealing with sequential inputs it is not that much of a problem if the actual user is unknown (i.e. anonymous session). What's important is the sequence itself. This is different in comparison to the traditional matrix completion setup in which each action is assigned to a specific user. In other words sequence-aware systems can work well with incomplete data. 
   
     Each action that the user takes corresponds to a recommendable item from the database. Furthermore each of those items can be of different types and can hold different attributes. 
@@ -21,3 +21,6 @@ Based on your analyses of last week, we now aim to develop a recommender system 
     Though it is not always the case that the full order of the input list is relevant. Sometimes it is only relevant that we know that a pair of actions occurred together. These are known as co-occurrence patterns. 
     
     Another pattern is to look at the distance between two items in the input list, i.e. how many actions / how much time has passed between some actions. This can be used to remind the user of something through a recommendation. 
+    
+    
+- b) The tasks that can be performed have already been described in a). To summarize sequence-aware recommendation systems can address: Patterns in the input sequence, relation between pairs of items in an input list that are next to each other, relation between pairs of items that are not next to each other (distance, time). 
