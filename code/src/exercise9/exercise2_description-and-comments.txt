@@ -1,0 +1,13 @@
+The goal of the challenge is to develop a session-based and context-aware recommender system which provides a list of accomodations that will match the needs of the user.
+Since the data provided is from differens sessions we need to model a sequential-aware recommender system.
+
+Based on our basline approach from the last submission we fist thought about a popularity-based recommender system where the initial recommendations are post-processed using the item metadata which adapts the initial recommendation results. This adaption could be done for each user based on his/her former item interactions by comparing the items content (basicall this would lead a popularity-based recommender system using content-based filtering).
+
+Doing further research on sequence-aware recommendations (given the items a user has interacted with in the past, what will be the next item they will interact with), we found out that there would be much better approches fitting the needs of the RecSys challenge.
+Sequential models could be realized using recurrent neural networks (e.g. LSTM or CNN). Hence, we decided on using the spotlight library (https://maciejkula.github.io/spotlight/) which provides a range of models and utilities for fitting next item recommendation models, including LSTM models and also causal convolution models.
+Why spotlight: research has proven that gated recurrent units can be successfully used for session-based recommendations with recurrent neural networs and spotlight implements a similar model using LSTM units as one of its sequence representations. Besides RNNs spotlight provids a causal convolutional model, which applies convolutional filters to the sequence in a left-to-right fashion, emitting one representation at each step. And it is ensured that there is no access to the elements of the sequence which is aimed to be predicted. We decided on using this approach from the spotlight library.
+
+The "weakness" of deciding on the spotlight library is that the dataset needs to be heavily adapted to represent sequential interactions in a specific form which can be used by the underlying algorithm. We are on a good way adapting the dataset, but for this weeks assignment we could not arrange to finish the adaptions...
+We are looking forward on our scores when we finally got the dataset as needed.
+
+
