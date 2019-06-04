@@ -31,6 +31,10 @@ Based on your analyses of last week, we now aim to develop a recommender system 
   
     Another algorithm for Sequence Learning is Sequence Modeling which takes the time stamps of the items into account. This is not simply used to determine the order of the items in the sequence, but rather to determine the time span between the items / actions in the sequence. Sequence modeling methods for sequence-aware recommendation mainly belong to three categories: Markov Models, Reinforcement Learning (RL) and Recurrent Neural Networks (RNN). 
   
-  Other algorithms are Distributed Item Representations and Supervised Learning with Sliding Windows
+    Other algorithms are Distributed Item Representations and Supervised Learning with Sliding Windows
   
-  - Sequence-Aware 
+  - Sequence-Aware Matrix Factorization: Normally matrix factorizations are not suitable for recommender systems that want to include sequences. However there are some applications were matrix factorizations can still be used. As described by Zhao et al. one of the use cases is to find out the timing for repeated recommendations by utilising a weighted loss function. 
+  
+    Another application can be found in interactive story telling. Matrix factorization can be used to predict the next part of a story that is tailored to the user. For this a so called prefix-rating matrix is needed which consists partly of story parts, that got rated by the users, and other unrated story parts. Matrix factorization can then predict which next story part fits the user best. 
+    
+  - Hybrid Methods: Combine the flexibility of sequence learning and the robustness of matrix factorization. Furthermore hybrid methods make it possible to use collaborative learning-to-rank models like BPR. An application for hybrid methods is for example the Factorized Personalized Markov Chain (FPMC) which combines matrix factorization with Markov Chains to solve the problem of next-item recommendation. The last n interactions of a user are provided in this context. Another approach based on hybrid methods are playlist recommendation. By using Latent Dirichlet Allocation (LDA) latent topics can be extracted from playlists which can then be used by sequential pattern mining techniques. 
