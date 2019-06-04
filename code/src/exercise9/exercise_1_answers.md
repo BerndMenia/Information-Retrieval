@@ -3,7 +3,7 @@ Based on your analyses of last week, we now aim to develop a recommender system 
   
 - [x] a (0.5 / 0.5 Points): How do the authors characterize the problem tackled by sequence-aware recommender systems?
 
-- [ ] b (0 / 0.5 Points): Give a short overview of the different tasks that can be addressed by sequence-aware recommender systems.
+- [x] b (0 / 0.5 Points): Give a short overview of the different tasks that can be addressed by sequence-aware recommender systems.
 
 - [ ] c (0 / 2 Points): How do the algorithms presented solve the task of computing sequence-aware recommendations? Please shortly characterize the approaches taken.
 
@@ -24,3 +24,13 @@ Based on your analyses of last week, we now aim to develop a recommender system 
     
     
 - b) The tasks that can be performed have already been described in a). To summarize sequence-aware recommendation systems can address: Patterns in the input sequence, relation between pairs of items in an input list that are next to each other, relation between pairs of items that are not next to each other (distance, time). 
+
+- c) The authors differentiate between three algorithm types: Sequence Learning, Sequence-Aware Matrix Factorization and Hybrids. Though most algorithms are modeled after the Sequence Learning approach. 
+
+  - Sequence Learning: Most useful when analyzed data has a sequential nature. This fits perfectly into sequence based recommender systems and therefore is also most used in that field. The methods used for Sequence learning are Frequent Pattern Mining (FPM), Sequential Pattern Mining and Contiguous Sequential Patterns (CSP). FPM is the most basic approach of thee three and focuses on if two items are present in the same transaction. Sequential Pattern Mining is equal to FPM, but with the difference that the order of the items is not neglectable. These two patterns are similar to the previously mentioned co-occurrence patterns. CSP require that two items appear adjacent to each other, which is similar to the co-occurrence pattern from before. 
+  
+    Another algorithm for Sequence Learning is Sequence Modeling which takes the time stamps of the items into account. This is not simply used to determine the order of the items in the sequence, but rather to determine the time span between the items / actions in the sequence. Sequence modeling methods for sequence-aware recommendation mainly belong to three categories: Markov Models, Reinforcement Learning (RL) and Recurrent Neural Networks (RNN). 
+  
+  Other algorithms are Distributed Item Representations and Supervised Learning with Sliding Windows
+  
+  - Sequence-Aware 
