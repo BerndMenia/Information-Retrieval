@@ -1,0 +1,48 @@
+IDEA: combine relatively simple neighborhood-based approaches to reach accurate results in finding continuations in playlists.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+The data includes meta info on playlists, seed tracks and metadata on tracks
+Parts only include playlist metadata, like the playlist name, but not a single seed track and hence also no metadata on tracks.
+So the authors came up with two approaches: track-based and name-based approach.
+For playlists including tracks, the authors used the following techniques for recommmendation:
+	item-based collaborative filtering (ITEM-CF)
+	session-based k-nearest-neighbor techniques (S-KNN), also with IDF extension (IDF-KNN)
+	implicit feedback matrix factorization approach (ALS-MF)
+For the playlists where only the name is known they used simple string matching strategies (STRING-MATCH) and title factorization (TITLE-MF) as extension of the string matching technique
+
+
+The RecSys challenge 2018 included a main and a creative track for submission, where in the main track only the provided data is allowd to use. In the crateive track any additional information can be added. In both cases the winner is the one with the best score.
+The authors combined the above mentioned techniques for the main track (hybrid approach) and for the crative track they used a re-ranking approach that utilizes additional track metadata.
+
+
+Results:
+When looking at each of the track-based techniques separately, IDF-KNN is the most accurate method. ITEM-CF is usually more precise than S-KNN, but S-KNN ranks items in a better way. ALS-MF is the worst method, however, in the hybrid approach, where all methods were combined, ALS-MF increases the performance when included along with the other methods. -> The hybrid approach leverages the strengths of all methods.
+For the name-based approaches, TITLE-MF improved NDCG and precision, but worsened Clicks metric. This might be due to the higher popularity tendency in TITLE-MF. Again, the hybrid approach balances the two methods, since STRING-MATCH pushes back some of the highly ranked tracks by TITLE-MF.
+With the author's re-ranking approach, small but consistent improvements could be recorded.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DESCRIPTION OF THE TECHNIQUES INCLUDED:
+
+(x) track-based
+
+-> ITEM-CF:
+The approach is based on individual item similarities. The similarity is determined by the number of the tracks co-occurrences. Therefore, each track is represented as binary vector over all playlists and the cosine similarity is computed. The top k most similar tracks are then recommended oredered by similarity.
+
+Due tho the high popularity bias in ITEM-CF, IDF was computed to give more importance to less popular tracks. This increased recommendation accuracy
+
+-> S-KNN:
+This approach does not create recommendations for each seed track individually but instead considers the entire playlist and searches for the most similar playlists by ranking tracks of neighboring playlists. Again, to push niche items, IDF is added to tracks. But IDF alone leaps in terms of accuracy and hence TF-IDF was used.
+Note: the implementation relies on precomputed in-memory index data structures and on neighborhood sampling to ensure fast prediction times. 
+
+-> ALS-MF:
+This approach is a popular collaborative filtering approach. The tracks in playlists which correspond to users are implicit feedback to construct the sparse binary user-item rating matrix. They used Bayesian Personalized Ranking (BPR). Problem: user cold-start scenario for poviding recommendations for newly created playlists. This problem is solved by using IDF for all item factors in order to construct th user latent factors from all item latent factors corresponding to the seed tracks of a playlist.
+
+(x) name-based
+
+-> STRING-MATCH:
+The goal is to find suitable tracks only given the name of a playlist. Therefore the authors collect all playlists with the most similar names and recommend the tracks from those playlists. Playlsit name similarities are found by preprocessing names using NLTK using tokenization and stemming, and then simply compare the resulting strings.
+
+-> TITLE-MF:
+This approach basically extends STRING-MATCH. But for finding matches, a user-item rating matrix is constructed, where the ratings are the number of co-occurences of the tracks for a user. Then, the names latent factors are used to find similar names.
