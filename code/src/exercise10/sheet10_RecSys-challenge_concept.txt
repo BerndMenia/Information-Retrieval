@@ -1,0 +1,17 @@
+Our idea for solving the RecSys challenge 2018 was to use a sequential modeling approach for sequence-aware recommendation.
+This could be solved using a LSTM for computing the scores. Together with the provided meta data we believe that this could have reached adequate scores.
+Therefore we found the spotlight library (https://maciejkula.github.io/spotlight/) which is provided for python.
+spotlight already provides an implementation for modeling a user representation through running a RNN over the sequence, 
+where the hidden state is used at each timestep as the sequence representation.
+Another approach implemented by spotlight is a causal convolution network. 
+To represent a sequence, the CNN runs a 1D convolution over the input sequence from left to right.
+At each timestep, the output of the convolution is the representation of the sequence up to that point.
+The convolution is causal since the future states are never part of the next step. 
+Causality is achieved by left-padding the sequence.
+What we mainly struggled with was transforming the dataset into a representation that can be used with spotlight.
+The implementations described above, need instances of a class that describes datasets of user-item interactions.
+Hence we needed to model the provided dataset accordingly.
+The interactions object contains a pair of user-item interactions that can be enriched with ratings timestamps and interaction weights.
+Alongside with this model a content-based recommender system using the meta data information could have been used to predict scores, 
+defining probabilities of how likely a user likes a specific item. 
+These scores could have been fed to the model described above as the interaction weights.
